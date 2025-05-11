@@ -177,6 +177,7 @@
         </symbol>
     </defs>
 </svg>
+
 <header data-eusoft-scrollable-element="1">
     <div class="wrapper" data-eusoft-scrollable-element="1">
         <a href="/lowincome-housing/" class="logo">
@@ -280,7 +281,6 @@
         <div class="cl"></div>
     </div>
 </header>
-
 <div class="login" id="login">
     <div class="shade" id="loginbox"></div>
     <div class="log_box">
@@ -329,6 +329,7 @@
         });
     }
 </script>
+
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <defs>
         <symbol id="icon-step1" viewBox="0 0 512 512">
@@ -664,7 +665,7 @@
             </div>
         </div>
 
-        <ul class="select-state" id = "select-state">
+        <ul class="select-state" id="select-state">
 
         </ul>
 
@@ -765,6 +766,7 @@
         Click Allow to get more free information about Affordable Housing in Alaska!
     </div>
 </div>
+
 <script src="./Public/Js/jquery-3.0.0.min.js"></script>
 <script>
     document.getElementById("year").textContent = new Date().getFullYear();
@@ -986,9 +988,9 @@
     const display_state = params.get('state');
     const display_city = params.get('city');
 
-    const { data, error } = await fetchDistrictsByCity(display_city);
+    const {data, error} = await fetchDistrictsByCity(display_city);
 
-    $(document).ready(function() {
+    $(document).ready(function () {
 
         let innerStr = '';
         data.forEach(item => {
