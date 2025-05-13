@@ -151,144 +151,10 @@
         </symbol>
     </defs>
     </svg>
-    <header data-eusoft-scrollable-element="1">
-        <div class="wrapper" data-eusoft-scrollable-element="1">
-            <a href="/" class="logo">
-                <img src="/Public/Images/housing/Housing-B.webp" alt="logo">
-            </a>
-            <input type="checkbox" id="hd-menu-input">
-            <div class="headshade" id="headshade"></div>
-            <div class="nav-icon-back">
-                <div class="icon-nav-btn">
-                    <a class="href-item" style="display: block;" href="/search/"></a>
-                    <svg class="href-item" style="z-index: 0;">
-                        <use xlink:href="#icon-search"></use>
-                    </svg>
-                </div>
-                <label for="hd-menu-input" class="hd-menu-btn" id="hd-menu-btn">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </label>
-            </div>
-            <nav class="nav" data-eusoft-scrollable-element="1">
-                <ul class="nav-ul" data-eusoft-scrollable-element="1">
-                    <li class="cor-category"><a href="javascript:void(0)">Waiting List</a>
-                        <ul class="cor-ul">
-                            <li><a href="/section8-waiting-list/">
-                                    <p>Section 8 Waiting List</p>
-                                </a></li>
-                            <li><a href="/public-housing-waiting-list/">
-                                    <p>Public Housing Waiting List</p>
-                                </a></li>
-                            <li><a href="/waiting-list-report/">
-                                    <p>Waiting List Openings</p>
-                                </a></li>
-                        </ul>
-                    </li>
-                    <li class="cor-category"><a href="javascript:void(0)">Affordable Housing</a>
-                        <ul class="cor-ul">
-                            <li><a href="/section8-housing/">
-                                    <p>Section 8 Housing</p>
-                                </a></li>
-                            <li><a href="/lowincome-housing/">
-                                    <p>Affordable Housing</p>
-                                </a></li>
-                            <li><a href="/housing-authority/">
-                                    <p>Housing Authority</p>
-                                </a></li>
-                            <li><a href="/rent-assistance/">
-                                    <p>Rent Assistance</p>
-                                </a></li>
-                            <li><a href="/foreclosure-housing/">
-                                    <p>Foreclosure Housing</p>
-                                </a></li>
-                        </ul>
-                    </li>
-                    <li class="cor-category"><a href="javascript:void(0)">Get Assistance</a>
-                        <ul class="cor-ul">
-                            <li><a href="/homeless-shelter/">
-                                    <p>Homeless Shelter</p>
-                                </a></li>
-                            <li><a href="/liheap/">
-                                    <p>Energy Assistance</p>
-                                </a></li>
-                            <li><a href="/thrift-store/">
-                                    <p>Thrift Store</p>
-                                </a></li>
-                            <li><a href="/legal-aid-list/">
-                                    <p>Legal Aid</p>
-                                </a></li>
-                            <li><a href="/guide/">
-                                    <p>Guide</p>
-                                </a></li>
-                            <li><a href="/glossary/">
-                                    <p>Glossary</p>
-                                </a></li>
-                            <li><a href="/posts/category/housing/">
-                                    <p>Articles</p>
-                                </a></li>
-                        </ul>
-                    </li>
-                    <li class="cor-category search-category" data-eusoft-scrollable-element="1">
-                        <a class="href-item" style="display: block;" href="/search/"></a>
-                        <svg class="icon-nav-btn" width="22" height="64">
-                            <use xlink:href="#icon-search"></use>
-                        </svg>
-                    </li>
-                    <li class="cor-category">
-                        <div class="google-img-wrap">
-                            <div class="google-img">
-                                <img src="/Public/Images/housing/avatar.svg" alt="user">
-                            </div>
-                            <span class="google-name">Sign In</span>
-                        </div>
-                        <div class="sign-out-btn">Sign Out</div>
-                    </li>
-                </ul>
-                <label for="hd-menu-input" class="nav-label" id="btclose">
-                    <span></span>
-                    <span></span>
-                </label>
-            </nav>
-            <div class="cl"></div>
-        </div>
+
+    <header data-eusoft-scrollable-element="1" id = "header">
     </header>
 
-    <div class="login" id="login">
-        <div class="shade" id="loginbox"></div>
-        <div class="log_box">
-            <button id="logclose">
-                <svg class="icon-close">
-                    <use xlink:href="#icon-close"></use>
-                </svg>
-            </button>
-            <div class="log-content">
-                <img class="" alt="Login" src="/Public/Images/housing/log-in.webp">
-                <h2>Log in to save your favorite Housing List</h2>
-                <p>Don’t miss the apartments you like!</p>
-                <div id="loginButton"></div>
-                <div class="signlater">Sign in later</div>
-            </div>
-        </div>
-    </div>
-    <script>
-        window.onload = function () {
-            // var shade = document.getElementById("shade");
-            let shade = document.querySelector(".shade");
-            var bt = document.getElementById("hd-menu-btn");
-            var btclose = document.getElementById("btclose");
-            bt.onclick = function () {
-                shade.style.display = "block";
-            }
-            btclose.onclick = function () {
-                shade.style.display = "none";
-            }
-            $("#backdrop").click(function () {
-                $(this).hide()
-            });
-        } 
-    </script>
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
         <defs>
             <symbol id="icon-step1" viewBox="0 0 512 512">
@@ -691,28 +557,9 @@
 
     </main>
 
-    <footer>
-        <div class="wrapper">
-            <a href="/" class="ft-logo">
-                <img src="./Public/Images/housing/Housing-W.webp" alt="logo">
-            </a>
-            <ul class="footer-ul">
-                <li><a href="/section8-housing/">SECTION 8 HOUSING</a></li>
-                <li><a href="/lowincome-housing/">AFFORDABLE HOUSING</a></li>
-                <li><a href="/support/about/">About Us</a></li>
-                <li><a href="/support/disclaimer/">Disclaimer</a></li>
-                <li><a href="/support/dmca/">DMCA</a></li>
-                <li><a href="/support/privacy-policy/">Privacy Policy</a></li>
-            </ul>
-            <p>© <span id="year">2025</span> USLowcost Housing. All Rights Reserved.</p>
-        </div>
+    <footer id = "footer">
     </footer>
-    <div id="backdrop">
-        <div class="inner">
-            <img src="/Public/Images/arrow.png" class="arrow" alt="arrow">
-            Click Allow to get more free information about Affordable Housing!
-        </div>
-    </div>
+
     <script src="./Public/Js/jquery-3.0.0.min.js"></script>
     <script>
         document.getElementById("year").textContent = new Date().getFullYear();
@@ -933,5 +780,37 @@
         document.addEventListener('scroll', lazyload);
 
     </script>
+    <script>
+        // 加载 header
+        fetch('./header.html')
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById('header').innerHTML = data;
+            });
+
+        // 加载 footer
+        fetch('./footer.html')
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById('footer').innerHTML = data;
+            });
+    </script>
+
+    <script type="module">
+
+        import {fetchDistinctStates} from './Public/Js/dataGet.js';
+
+        const { data, error } = await fetchDistinctStates();
+
+        $(document).ready(function() {
+            let innerStr = '';
+            data.forEach(item => {
+                innerStr += `<li><a href="./city.html?state=${item.display_state}">${item.display_state}</a></li>`;
+            });
+
+            document.getElementById('select-state').innerHTML = innerStr;
+        });
+    </script>
+
 </body>
 </html>
