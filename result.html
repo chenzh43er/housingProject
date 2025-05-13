@@ -9,7 +9,38 @@
         content="Find detailed information on Chugach View, including address, phone number, services, and more.">
     <link type="text/css" rel="stylesheet" href="./Public/Css/hs-style.css">
     <link type="text/css" rel="stylesheet" href="./Public/Css/lch-office.css">
-   
+    <style>
+        .success-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+        }
+        .success-content {
+            text-align: center;
+        }
+        .success-icon {
+            font-size: 48px;
+            color: #52c41a;
+            margin-bottom: 16px;
+        }
+        .success-text {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 24px;
+        }
+        .back-btn {
+            display: inline-block;
+            padding: 8px 24px;
+            background: #1890ff;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .back-btn:hover {
+            background: #40a9ff;
+        }
+    </style>
 </head>
 
 <body>
@@ -151,10 +182,6 @@
             </symbol>
         </defs>
     </svg>
-
-    <header data-eusoft-scrollable-element="1" id = "header">
-    </header>
-
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
         <defs>
             <symbol id="icon-website" viewBox="0 0 512 512">
@@ -185,7 +212,7 @@
                 <g>
                     <g>
                         <path
-                            d="m250.333 0c-138.037 0-250.333 112.296-250.333 250.333s112.296 250.333 250.333 250.333 250.333-112.296 250.333-250.333-112.295-250.333-250.333-250.333zm0 450.6c-110.425 0-200.267-89.841-200.267-200.267s89.842-200.266 200.267-200.266 200.267 89.841 200.267 200.266-89.841 200.267-200.267 200.267zm117.833-217.966c9.779 9.779 9.779 25.62 0 35.399l-75.1 75.1c-4.889 4.889-11.294 7.334-17.699 7.334s-12.81-2.445-17.699-7.334c-9.779-9.779-9.779-25.62 0-35.399l32.367-32.367h-139.835c-13.825 0-25.033-11.209-25.033-25.033 0-13.825 11.209-25.033 25.033-25.033h139.835l-32.367-32.367c-9.779-9.779-9.779-25.62 0-35.399s25.62-9.779 35.399 0z">
+                                d="m250.333 0c-138.037 0-250.333 112.296-250.333 250.333s112.296 250.333 250.333 250.333 250.333-112.296 250.333-250.333-112.295-250.333-250.333-250.333zm0 450.6c-110.425 0-200.267-89.841-200.267-200.267s89.842-200.266 200.267-200.266 200.267 89.841 200.267 200.266-89.841 200.267-200.267 200.267zm117.833-217.966c9.779 9.779 9.779 25.62 0 35.399l-75.1 75.1c-4.889 4.889-11.294 7.334-17.699 7.334s-12.81-2.445-17.699-7.334c-9.779-9.779-9.779-25.62 0-35.399l32.367-32.367h-139.835c-13.825 0-25.033-11.209-25.033-25.033 0-13.825 11.209-25.033 25.033-25.033h139.835l-32.367-32.367c-9.779-9.779-9.779-25.62 0-35.399s25.62-9.779 35.399 0z">
                         </path>
                     </g>
                 </g>
@@ -211,274 +238,24 @@
             </symbol>
         </defs>
     </svg>
+
+    <header data-eusoft-scrollable-element="1" id = "header">
+    </header>
+
+
     <div class="success-wrap">
         <div class="success-content">
             <div class="success-icon">✓</div>
-            <div class="success-text">提交成功</div>
-            <div class="back-btn" onclick="returnToList()">返回到列表页</div>
+            <div class="success-text">Erfolgreich eingereicht</div>
+            <div class="back-btn" onclick="returnToList()">Zurück zur Startseite</div>
         </div>
     </div>
-
-    <style>
-        .success-wrap {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 300px;
-        }
-        .success-content {
-            text-align: center;
-        }
-        .success-icon {
-            font-size: 48px;
-            color: #52c41a;
-            margin-bottom: 16px;
-        }
-        .success-text {
-            font-size: 24px;
-            color: #333;
-            margin-bottom: 24px;
-        }
-        .back-btn {
-            display: inline-block;
-            padding: 8px 24px;
-            background: #1890ff;
-            color: #fff;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .back-btn:hover {
-            background: #40a9ff;
-        }
-    </style>
 
     <footer id = "footer">
     </footer>
 
     <script src="./Public/Js/jquery-3.0.0.min.js"></script>
-    <script>
-        document.getElementById("year").textContent = new Date().getFullYear();
-        var loginStatus = false
-        $(".google-img-wrap").click(function () {
-            if (localStorage.userInfo !== undefined) {
-                $(".sign-out-btn").css('display', 'block')
-            } else if (!loginStatus) {
-                $("#login").css('display', 'block')
-            } else {
-                return
-            }
-        })
 
-        $(".sign-out-btn").click(function () {
-            $(".sign-out-btn").css('display', 'none')
-        })
-        $('.signlater').click(function () {
-            $('#login').hide()
-        });
-        $('.icon-close').click(function () {
-            $('#login').hide()
-        });
-
-       
-        function updateTable() {
-            var clinicMark = localStorage.getItem('clinicMark');
-            if (clinicMark) {
-                var items = JSON.parse(clinicMark);
-                $(".total").text(items.length);
-                if (items.length > 1) {
-                    $(".option").text('options');
-                } else {
-                    $(".option").text('option');
-                }
-                $(".favourites_added tbody").empty();
-                items.forEach(function (item) {
-                    var str = '<tr class=\"show\">';
-                    str += '<td><a href="' + item.href + '">' + item.txt + '</a></td>';
-                    str += '<td><img src=\"/Public/Images/delet.png\" class=\"delet\" alt=\"delet\"></td>';
-                    str += '</tr>';
-                    $(".favourites_added tbody").append(str);
-                    console.log("footer: add to the table")
-                });
-            }
-        }
-        
-
-        $(".shortListButton").click(function (event) {
-            updateTable();
-            event.stopPropagation()
-            $(".wishBar").toggleClass("expanded")
-            $(".wishBarCover").css("width", "100%")
-        })
-
-        $("body").click(function () {
-            $(".wishBar").removeClass("expanded");
-            $(".wishBarCover").css("width", "0");
-        });
-        $(".icon_game").click(function () {
-            $(".wishBar").removeClass("expanded");
-            $(".wishBarCover").css("width", "0");
-        });
-
-        $(".wishBar").click(function (event) {
-            event.stopPropagation();
-        });
-
-        $(".favourites_added").on('click', '.delet', function () {
-            var txt = $(this).parent().siblings().find('a').text();
-            var href = $(this).parent().siblings().find('a').attr("href");
-            var clinicMark = localStorage.getItem('clinicMark');
-            if (clinicMark) {
-                var items = JSON.parse(clinicMark);
-                var index = items.findIndex(function (item) {
-                    return (item.txt === txt && item.href === href);
-                });
-                if (index !== -1) {
-                    items.splice(index, 1);
-                }
-                localStorage.setItem('clinicMark', JSON.stringify(items));
-                $('.like').each(function () {
-                    if ($(".title").length > 0) {
-                        var txt2 = $(".title").text();
-                        var href2 = window.location.pathname;
-                    }
-                    if ($(".imgli-box").length > 0) {
-                        var txt2 = $(this).parents(".imgli-box").siblings(".statetitle").text();
-                        var href2 = $(this).parents(".imgli-box").siblings("a").attr("href");
-                    }
-                    if ($(".statelistwl-right").length > 0) {
-                        var txt2 = $(this).parents(".statelistwl-right").siblings(".statelistwl-left").find(".statetit-wl").text();
-                        var href2 = $(this).parents(".statelistwl-right").siblings("a").attr("href");
-                    }
-                    if (txt2 === txt && href2 === href) {
-                        $(this).removeClass('remove');
-                        console.log("footer: remove class .remove")
-                    }
-                })
-                updateTable();
-                $(".total").text(items.length);
-            }
-        });
-
-        jQuery(document).ready(function () {
-            var Mark = '';
-            if (localStorage.clinicMark) {
-                Mark = localStorage.getItem("clinicMark");
-                var clinicMark = localStorage.getItem("clinicMark");
-                var items = JSON.parse(clinicMark)
-                $(".total").text(items.length);
-
-                var arrItems = arr.length;
-                console.log(arrItems)
-                if (numItems > 1) {
-                    $(".option").text('options');
-                } else {
-                    $(".option").text('option');
-                }
-
-                $(arr).each(function (i, item) {
-                    var href1 = localStorage.getItem(arr[i]);
-                    str1 = '<tr class=\"show\">';
-                    str1 += '<td><a href="' + href1 + '">' + arr[i] + '</a></td>';
-                    str1 += '<td><img src=\"/Public/Images/delet.png\" class=\"delet\" alt=\"delet\"></td>';
-                    str1 += '</tr>';
-                    $(".favourites_added tbody").append(str1);
-                    var arrin = arr[i];
-                    $(".statetitle").each(function (i, item) {
-                        if ($(this).text() == arrin) {
-                            console.log($(this).text())
-                            $(this).siblings(".most-bottom").find(".like").addClass("remove")
-                            $(this).siblings(".imgli-box").find(".like").addClass("remove")
-                            $(this).siblings(".more").find(".like").addClass("remove")
-                        }
-                    })
-                    $(".statetit-wl").each(function (i, item) {
-                        if ($(this).text() == arrin) {
-                            $(this).parents(".statelistwl-left").siblings(".statelistwl-right").find(".like").addClass("remove")
-                        }
-                    })
-                    $("#office-tl").each(function (i, item) {
-                        if ($(this).text() == arrin) {
-                            $(".like").addClass("remove")
-                        }
-                    })
-                    $(".title").each(function (i, item) {
-                        if ($(this).text() == arrin) {
-                            $(".like").addClass("remove")
-                        }
-                    })
-                });
-            } else {
-                $(".if_none").show()
-            }
-        })
-
-    </script>
-    <script>
-        var isSupportWebp = !![].map && document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp') == 0;
-
-
-        var viewHeight = document.documentElement.clientHeight;
-
-        function lazyload() {
-            var eles = document.querySelectorAll('img[lazyload]');
-
-            Array.prototype.forEach.call(eles, function (item, index) {
-                var rect;
-                console.log(window.getComputedStyle(item, null).display)
-
-                if (item.dataset.src === '' || window.getComputedStyle(item, null).display == 'none') {
-                    return;
-                }
-                rect = item.getBoundingClientRect();
-                if (rect.bottom >= 0 && rect.top < viewHeight) {
-                    !function () {
-                        var img = new Image();
-
-                        if (document.body.clientWidth <= 425) {
-                            if (isSupportWebp == true && item.dataset.webpsmallsrc) {
-                                console.log(item.dataset.webpsmallsrc);
-                                img.src = item.dataset.webpsmallsrc;
-                            } else if (isSupportWebp == true && !item.dataset.webpsmallsrc) {
-                                img.src = item.dataset.webpsrc;
-                            } else if (isSupportWebp == false && item.dataset.webpsmallsrc) {
-                                img.src = item.dataset.smallsrc;
-                            } else {
-                                img.src = item.dataset.src;
-                            }
-                        } else {
-                            if (isSupportWebp == true) {
-                                img.src = item.dataset.webpsrc;
-                            } else {
-                                img.src = item.dataset.src;
-                            }
-                        }
-
-                        img.onload = function () {
-                            item.src = img.src;
-                        }
-                        item.removeAttribute('data-webpsrc');
-                        item.removeAttribute('data-webpsmallsrc');
-                        item.removeAttribute('data-src');
-                        item.removeAttribute('data-smallsrc');
-                        item.removeAttribute('lazyload');
-                    }();
-                }
-            })
-        }
-
-        lazyload();
-        document.addEventListener('scroll', lazyload);
-
-    </script>
-
-    <script>
-        // $(".btn").click(function() {
-        //     $(".hide").val($(this).siblings(".info_span").text().trim());
-        //     $(".hide").select();
-        //     document.execCommand("Copy");
-        //     $(this).text("Copy succeeded");
-        // })
-    </script>
     <script>
         window.addEventListener('pageshow', function (event) {
             if (event.persisted || (window.performance && window.performance.getEntriesByType && String(window.performance.getEntriesByType('navigation')[0].type) === 'back_forward')) {
@@ -486,19 +263,6 @@
             }
         });
         jQuery(document).ready(function () {
-            // window.addEventListener('popstate', function(event) {
-            //     updateClassAndTableName()
-            //     console.log("postate")
-            // }, false);
-            // document.addEventListener('DOMContentLoaded', function() {
-            //     updateClassAndTableName()
-            //     console.log("DOMC")
-            // });
-            // var name = $(".title").text();
-            // if(localStorage.getItem(name)) {
-            //     $(this).parents(".detail-left").siblings(".more").find(".like").addClass("remove");
-            //     console.log("add remove to", name)
-            // }
             updateClassAndTableName()
             $(".like").click(function () {
                 //login to use save function

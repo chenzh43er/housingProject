@@ -215,42 +215,44 @@
      style="max-width: 600px; margin: 0 auto; padding: 30px; background: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
     <form>
         <div class="form-group" style="margin-bottom: 20px;">
-            <label style="display: block; margin-bottom: 8px; font-weight: bold;">称呼：</label>
+            <label style="display: block; margin-bottom: 8px; font-weight: bold;">Anrede</label>
             <div class="radio-group" style="display: flex; gap: 20px;">
                 <input type="radio" id="mr" name="title" value="先生" style="margin-right: 5px;">
-                <label for="mr" style="margin-right: 15px;">先生</label>
+                <label for="mr" style="margin-right: 15px;">Herr</label>
                 <input type="radio" id="ms" name="title" value="女士" style="margin-right: 5px;">
-                <label for="ms">女士</label>
+                <label for="ms">Frau</label>
+                <input type="radio" id="other" name="title" value="女士" style="margin-right: 5px;">
+                <label for="ms">Divers</label>
             </div>
         </div>
 
         <div class="form-group" style="margin-bottom: 20px;">
-            <label for="name" style="display: block; margin-bottom: 8px; font-weight: bold;">姓名：</label>
+            <label for="name" style="display: block; margin-bottom: 8px; font-weight: bold;">name：</label>
             <input type="text" id="name" name="name" required
                    style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
         </div>
 
         <div class="form-group" style="margin-bottom: 20px;">
-            <label for="email" style="display: block; margin-bottom: 8px; font-weight: bold;">电子邮件：</label>
+            <label for="email" style="display: block; margin-bottom: 8px; font-weight: bold;">E-Mail</label>
             <input type="email" id="email" name="email" required
                    style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
         </div>
 
         <div class="form-group" style="margin-bottom: 20px;">
-            <label for="phone" style="display: block; margin-bottom: 8px; font-weight: bold;">电话：</label>
+            <label for="phone" style="display: block; margin-bottom: 8px; font-weight: bold;">Telefon(Optional)</label>
             <input type="tel" id="phone" name="phone" required
                    style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
         </div>
 
         <div class="form-group" style="margin-bottom: 20px;">
-            <label for="message" style="display: block; margin-bottom: 8px; font-weight: bold;">留言：</label>
+            <label for="message" style="display: block; margin-bottom: 8px; font-weight: bold;">Ich bin Eigentümer einer Immobilie</label>
             <textarea id="message" name="message" rows="4"
                       style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
         </div>
 
         <button type="button" onclick="submitForm()" class="submit-btn"
                 style="width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">
-            提交
+            Kontaktanfrage senden
         </button>
     </form>
 </div>
