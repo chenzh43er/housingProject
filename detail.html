@@ -258,9 +258,8 @@
                     </span>
                 </div>
                 <h1 class="title" data-eusoft-scrollable-element="1" id="titleMessage"></h1>
-            </div>
-            <div class="adswp" style="height: auto !important;" data-eusoft-scrollable-element="1">
-                <div class="advertisement" data-eusoft-scrollable-element="1">Advertisement</div>
+
+                <h3 style="margin-top: 20px" id="cdkeyMessage">CD-KEY:</h3>
             </div>
 
             <div style="display: flex;" class="img-box">
@@ -860,6 +859,7 @@
             }
 
             document.getElementById('titleMessage').innerText = data.name
+            document.getElementById('cdkeyMessage').innerText = "Key:" + data.cdkey
 
             if(data.msg.length > 10){
                 document.getElementById('message').innerHTML = `

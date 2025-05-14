@@ -24,6 +24,10 @@ export async function fetchData(state, city, district, pageNumber = 1, pageSize 
             query = query.eq('display_district', district);
         }
 
+        query = query.order('statetype',{ ascending: true })
+
+
+
         const { data, error } = await query;
 
         // 如果发生错误，抛出异常

@@ -12,9 +12,17 @@
     <link type="text/css" rel="stylesheet" href="./Public/Css/lch-office.css">
     <link rel="stylesheet" href="./Public/Css/pagination.css">
     <script src="./Public/Js/jquery-3.0.0.min.js"></script>
-
     <script src="./Public/Js/pagination.min.js"></script>
+    <style>
+        .state-address {
+            display: flex;
+        }
 
+        .state-address span {
+            flex: 1; /* 平分空间 */
+            box-sizing: border-box;
+        }
+    </style>
 </head>
 
 <body>
@@ -674,28 +682,32 @@
                 const picsObj = JSON.parse(house.pics_jsonStr);
 
                 html += `
+                    <a href="./detail.html?id=${house.id}">
                     <li class="statelists-imgli">
                         <div class="statelists-link">
-                            <div class="imgli-box" style="width:60%">
+                            <div class="imgli-box" style="width:48%">
                                 <img src="${serverPic + picsObj[0]}" alt="${house.name}" class="most-img">
                             </div>
                             <div class="statelists-right">
-                                <div class="statetitle">${house.name}</div>
+                            <div class="statetitle">${house.name}</div>
                             <div class="state-address">${house.location}</div>
+                            <div class="state-address">${house.ver}</div>
+                            <div class="state-address">${house.statetype}</div>
+
+                            <div class="state-address">
+                                <span>${house.room} Zimmer</span>
+                                <span>${house.area}</span>
+                                <span>${house.loft}Geschoss</span>
+                            </div>
+
                             <div class="most-bottom">
                                 <div class="most-left" data-eusoft-scrollable-element="1">
-                                    $${house.price}
-                                </div>
-                                
-                            </div>    
-                            <div class="most-icon">
-                                    <span class="most-price" onclick="window.location.href='./detail.html?id=${house.id}'">
-                                        Check Details
-                                    </span>
+                                    $${house.price} Kaltmiete zzgl. NK
                                 </div>
                             </div>
                         </div>
-                    </li>`;
+                    </li>
+</a>`;
             });
             $('.statelists').html(html);
         })
