@@ -38,6 +38,27 @@
         font-size: 40px;
         cursor: pointer;
     }
+
+    .containerMessage {
+        display: flex;
+    }
+
+    .boxMessageOneline{
+        padding: 10px;
+    }
+
+    .boxMessage {
+        width: 50%;
+        padding: 10px;
+    }
+
+    .houseMessagediv{
+        font: 700 1rem/1.5rem "immo Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;
+    }
+
+    .locationMessage{
+        font: 600 1rem/1.5rem "immo Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;
+    }
 </style>
 
 <body>
@@ -775,57 +796,39 @@
         const { data, error } = await fetchDataById(houseId);
 
         $(document).ready(function() {
-            $('.info').html(` <li>
-                    <span class="infoname">
-                        <svg class="location">
-                            <use xlink:href="#location"></use>
-                        </svg>
-                    </span>
-                    <span class="info_address info_span">
-                        ${data.location} </span>
-                    
-                </li>
-                <li>
-                    <span class="infoname">
-                        <svg class="phone">
-                            <use xlink:href="#phone"></use>
-                        </svg>
-                    </span>
-                    <span class="info_span">${data.tel}</span>
-                    <!-- <button class="btn">Copy Phone</button> -->
-                </li>
-                <li>
-                    <span class="infoname">
-                        <svg class="phone">
-                            <use xlink:href="#icon-price"></use>
-                        </svg>
-                    </span>
-                    <span class="info_span">${data.price}</span>
-                </li>
-                <li>
-                    <span class="infoname">
-                        <svg class="phone">
-                            <use xlink:href="#icon-none"></use>
-                        </svg>
-                    </span>
-                    <span class="info_span">${data.loft}</span>
-                </li>
-                <li>
-                    <span class="infoname">
-                        <svg class="phone">
-                            <use xlink:href="#icon-sale"></use>
-                        </svg>
-                    </span>
-                    <span class="info_span">${data.area}</span>
-                </li>
-                <li>
-                    <span class="infoname">
-                        <svg class="phone">
-                            <use xlink:href="#icon-more"></use>
-                        </svg>
-                    </span>
-                    <span class="info_span">${data.room}</span>
-                </li>`)
+
+            const innerDetailHtml = `
+                <div class="containerMessage" style="border-bottom: 1px solid black;">
+                    <div class="boxMessageOneline">
+                        <h3>${data.ver}</h3>
+                        <h2>${data.price}</h2>
+                        Kaltmiete zzgl. NK
+                     </div>
+                </div>
+
+                <div class="containerMessage">
+                    <div class="boxMessage"><p class = "houseMessagediv">${data.room}</p> Zimmer</div>
+                    <div class="boxMessage"><p class = "houseMessagediv">${data.area}</p> Wohnfläche</div>
+                </div>
+                <div class="containerMessage" style="border-bottom: 1px solid black;">
+                    <div class="boxMessage"><p class = "houseMessagediv">${data.loft}</p> Geschoss</div>
+                    <div class="boxMessage"><p class = "houseMessagediv">${data.statetype}</p> Projekttyp</div>
+                </div>
+
+                <div class="containerMessage">
+                    <div class="boxMessageOneline locationMessage">
+                        ${data.location}
+                    </div>
+                </div>
+
+                <div class="containerMessage" style="border-bottom: 1px solid black;">
+                    <div class="boxMessageOneline locationMessage">
+                        ${data.supplier} ${data.tel}
+                    </div>
+                </div>
+            `
+
+            $('.info').html(innerDetailHtml)
 
             const picsObj = JSON.parse(data.pics_jsonStr);
 
