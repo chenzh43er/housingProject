@@ -511,84 +511,77 @@
                 document.getElementById('footer').innerHTML = data;
             });
     </script>
-    <script type="module">
-        // const data = [{ "id": 1, "name": "Lovely Apartment", "pic": "https://example.com/pic1.jpg",
-        //     "price": 1200, "area": "80㎡", "room": "2室1厅", "location": "Mitte, Berlin" },
-        //     { "id": 1, "name": "Lovely Apartment", "pic": "https://example.com/pic1.jpg",
-        //         "price": 1200, "area": "80㎡", "room": "2室1厅", "location": "Mitte, Berlin" },
-        //     { "id": 1, "name": "Lovely Apartment", "pic": "https://example.com/pic1.jpg",
-        //         "price": 1200, "area": "80㎡", "room": "2室1厅", "location": "Mitte, Berlin" }]
 
-        import {fetchData} from './Public/Js/dataGet.js';
+    <script type="module">
+        import { fetchData, countHouses } from './Public/Js/dataGet.js';
 
         const params = new URLSearchParams(window.location.search);
-
         const display_state = params.get('state');
         const display_city = params.get('city');
         const display_district = params.get('district');
-        const page = params.get('page');
 
-        const { data, error } = await fetchData(display_state,display_city,display_district);
+        // 获取总数
+        const { count: totalCount, error: countError } = await countHouses(display_state, display_city, display_district);
+        if (countError) {
+            console.error('统计数量失败:', countError);
+        }
 
-        let html = '';
-        $(document).ready(function () {
+        // 渲染房源列表
+        async function renderList(pageNumber = 1) {
+            const { data, error } = await fetchData(display_state, display_city, display_district, pageNumber, 20);
+            if (error) {
+                console.error('数据获取失败:', error);
+                return;
+            }
 
-
-
+            let html = '';
             data.forEach(house => {
-
-                const serverPic = "https://pub-57bc773ebbc24ef1be9f0d6d9681b286.r2.dev/" + house.mainpic + "/"
-                const picsObj = JSON.parse(house.pics_jsonStr);
+                const serverPic = "https://pub-57bc773ebbc24ef1be9f0d6d9681b286.r2.dev/" + house.mainpic + "/";
+                const picsObj = JSON.parse(house.pics_jsonStr || "[]");
 
                 html += `
-                    <a href="./detail.html?id=${house.id}">
-                    <li class="statelists-imgli">
-                        <div class="statelists-link">
-                            <div class="imgli-box">
-                                <img src="${serverPic + picsObj[0]}" alt="${house.name}" class="most-img">
-                            </div>
-                            <div class="statelists-right">
+            <a href="./detail.html?id=${house.id}">
+                <li class="statelists-imgli">
+                    <div class="statelists-link">
+                        <div class="imgli-box">
+                            <img src="${serverPic + (picsObj[0] || '')}" alt="${house.name}" class="most-img">
+                        </div>
+                        <div class="statelists-right">
                             <div class="statetitle">${house.name}</div>
                             <div class="state-address">${house.location}</div>
                             <div class="state-address">${house.ver}</div>
                             <div class="state-address">${house.statetype}</div>
-
                             <div class="state-address">
                                 <span>${house.room} Zimmer</span>
                                 <span>${house.area}</span>
-                                <span>${house.loft}Geschoss</span>
+                                <span>${house.loft} Geschoss</span>
                             </div>
-
                             <div class="most-bottom">
-                                <div class="most-left" data-eusoft-scrollable-element="1">
+                                <div class="most-left">
                                     $${house.price} Kaltmiete zzgl. NK
                                 </div>
                             </div>
                         </div>
-                    </li>
-</a>`;
+                    </div>
+                </li>
+            </a>`;
             });
+
             $('.statelists').html(html);
-        })
+        }
 
-        let total = 400;
+        // 初始化分页
+        $(document).ready(function () {
+            getQueryParams();
 
-        $('#paginationjs').pagination({
-            dataSource: function(done){
-                const result = []
-                for(let i = 0; i < total; i++){
-                    result.push(i)
+            $('#paginationjs').pagination({
+                dataSource: Array.from({ length: totalCount }, (_, i) => i + 1),
+                pageSize: 20,
+                callback: function (_, pagination) {
+                    renderList(pagination.pageNumber);
                 }
-                done(result)
-            },
-            pageSize: 20,
-            callback: function(data, pagination) {
-                console.log(data,pagination);
-                getPageData(pagination)
-                // template method of yourself
-            }
-        })
-
+            });
+        });
 
         // 从URL获取参数并存储到localStorage
         function getQueryParams() {
@@ -597,20 +590,12 @@
             const city = urlParams.get('city') || '';
             const district = urlParams.get('district') || '';
 
-            // 存储到localStorage
             localStorage.setItem('state', state);
             localStorage.setItem('city', city);
             localStorage.setItem('district', district);
         }
-
-        // 页面加载时执行
-        $(document).ready(function () {
-            getQueryParams();
-        });
-
-
-       
     </script>
+
 </body>
 
 </html>

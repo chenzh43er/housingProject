@@ -26,8 +26,6 @@ export async function fetchData(state, city, district, pageNumber = 1, pageSize 
 
         query = query.order('statetype',{ ascending: true })
 
-
-
         const { data, error } = await query;
 
         // 如果发生错误，抛出异常
@@ -41,6 +39,27 @@ export async function fetchData(state, city, district, pageNumber = 1, pageSize 
         return { data: null, error: err.message };
     }
 }
+
+export async function countHouses(state = null, city = null, district = null) {
+    try {
+        const { data, error } = await supabase.rpc('count_houses_by_location', {
+            input_state: state,
+            input_city: city,
+            input_district: district
+        });
+
+        if (error) {
+            throw new Error(`统计房源数量时发生错误: ${error.message}`);
+        }
+
+        return { count: data, error: null };
+    } catch (err) {
+        console.error('countHouses 错误:', err);
+        return { count: null, error: err.message };
+    }
+}
+
+
 
 // 通过 RPC 获取所有去重后的州
 export async function fetchDistinctStates() {
