@@ -534,6 +534,8 @@
                 return;
             }
 
+            document.getElementById('total').innerText = totalCount;
+
             let html = '';
             data.forEach(house => {
                 const serverPic = "https://pub-57bc773ebbc24ef1be9f0d6d9681b286.r2.dev/" + house.mainpic + "/";
