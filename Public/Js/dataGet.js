@@ -41,6 +41,20 @@ export async function fetchData(state, city, district, pageNumber = 1, pageSize 
 }
 
 export async function countHouses(state = null, city = null, district = null) {
+
+    if(state == ""){
+        state = null
+    }
+
+    if(city == ""){
+        city = null
+    }
+
+    if(district == ""){
+        district = null
+    }
+
+
     try {
         const { data, error } = await supabase.rpc('count_houses_by_location', {
             input_state: state,
@@ -124,7 +138,7 @@ export async function fetchDataById(id) {
 }
 
 // 根据 display_state 随机获取 5 条房源
-export async function fetchRandomHousesByState(displayState, count = 5) {
+export async function fetchRandomHousesByState(displayState = 'Berlin', count = 5) {
     try {
         const { data, error } = await supabase.rpc('get_random_houses_by_state', {
             input_state: displayState,

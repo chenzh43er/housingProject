@@ -35,8 +35,28 @@
 
         @media screen and (max-width: 900px) {
             .select-state {
-                grid-template-columns: 1fr;
+                grid-template-columns:  repeat(2, 1fr);
             }
+        }
+
+        .selectLidiv{
+            border: 1px solid;border-radius: 10px;border-color: #eee;
+            padding: 10px;min-height: 50px;display: flex; align-items: center;
+            color: #333333
+        }
+
+        .selectLidiv a{
+            color: #333333
+        }
+
+        .selectLidiv:hover{
+            border: 1px solid;border-radius: 10px;border-color: #1174eb;
+            padding: 10px;min-height: 50px;display: flex; align-items: center;
+            color:#1174eb
+        }
+
+        .selectLidiv:hover a{
+            color: #1174eb
         }
     </style>
 </head>
@@ -808,7 +828,12 @@
 
         let innerStr = '';
         data.forEach(item => {
-            innerStr += `<li><a href="./district.html?state=${display_state}&city=${item.display_city}">${item.display_city}</a></li>`;
+            innerStr += `<li>
+<a href="./district.html?state=${display_state}&city=${item.display_city}">
+<div class = "selectLidiv">
+${item.display_city}</div>
+</a>
+</li>`;
         });
 
         document.getElementById('select-state').innerHTML = innerStr;

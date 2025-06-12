@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <title>Title</title>
   <link type="text/css" rel="stylesheet" href="./Public/Css/hs-style.css">
   <link type="text/css" rel="stylesheet" href="./Public/Css/lch-office.css">
   <script src="./Public/Js/utlParam.js"></script>
@@ -17,6 +17,19 @@
   <div class="most-read" data-eusoft-scrollable-element="1">
     <h2 class="common-tit">Affordable Housing Advice</h2>
     <ul class="most-list">
+      <li>
+        <div class="most-box">
+          <a href="./post.html?postid=10000" class="href-item"></a>
+          <img src="./Public/Images/cover/section-8-pays-for-your-rental-costs.webp"
+               alt="section-8-pays-for-your-rental-costs" class="most-img">
+          <h5 class="most-tit">!! betreutes wohnen !! - 2 Raumwohnung zu vermieten</h5>
+          <div class="most-bottom">
+            <p class="most-content" data-eusoft-scrollable-element="1"> Meusdorfer Str.10a,Connewitz,Leipzig (04277)
+            </p>
+          </div>
+          <h5 class="most-tit">560 € Kaltmiete zzgl. NK</h5>
+        </div>
+      </li>
       <li>
         <div class="most-box">
           <a href="./post.html?postid=10001"
@@ -51,10 +64,11 @@
 <script type="module">
   import { fetchRandomHousesByState} from './Public/Js/dataGet.js';
   const urlParams = new URLSearchParams(window.location.search);
-  const { data, error } = await fetchRandomHousesByState();
+  const display_state = urlParams.get('state');
+  const { data, error } = await fetchRandomHousesByState(display_state);
 
   $(document).ready(function() {
-
+    console.log(data)
   });
 </script>
 </body>

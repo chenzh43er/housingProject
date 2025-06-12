@@ -9,6 +9,7 @@
         content="Find detailed information on Chugach View, including address, phone number, services, and more.">
     <link type="text/css" rel="stylesheet" href="./Public/Css/hs-style.css">
     <link type="text/css" rel="stylesheet" href="./Public/Css/lch-office.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script src="./Public/Js/utlParam.js"></script>
 
 </head>
@@ -59,6 +60,56 @@
 
     .locationMessage{
         font: 600 1rem/1.5rem "immo Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;
+    }
+
+    .share-title {
+        text-align: center;
+        font-size: 1.2em;
+        margin-bottom: 20px;
+    }
+
+    .social-share {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 10px;
+    }
+
+    .social-btn {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+        color: white;
+        text-decoration: none;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .social-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    /* Platform-specific colors */
+    .facebook   { background-color: #3b5998; }
+    .instagram  { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+    .twitter    { background-color: #1da1f2; }
+    .youtube    { background-color: #ff0000; }
+    .whatsapp   { background-color: #25d366; }
+    .pinterest  { background-color: #bd081c; }
+    .snapchat   { background-color: #fffc00; color: black; }
+    .messenger  { background-color: #0084ff; }
+
+    @media (max-width: 600px) {
+        .social-btn {
+            width: 48px;
+            height: 48px;
+            font-size: 20px;
+        }
     }
 </style>
 
@@ -261,6 +312,7 @@
             </symbol>
         </defs>
     </svg>
+
     <main class="wrapper contents" style="height: auto !important; min-height: 0px !important;"
         data-eusoft-scrollable-element="1">
 
@@ -282,7 +334,35 @@
                 </div>
                 <h1 class="title" data-eusoft-scrollable-element="1" id="titleMessage"></h1>
 
-                <h3 style="margin-top: 20px" id="cdkeyMessage">CD-KEY:</h3>
+                <div id = "shareDiv">
+                    <div class="social-share">
+                        <a class="social-btn facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://example.com" title="Facebook" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a class="social-btn instagram" href="https://www.instagram.com" title="Instagram" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a class="social-btn twitter" href="https://twitter.com/intent/tweet?url=https://example.com" title="Twitter" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a class="social-btn youtube" href="https://www.youtube.com" title="YouTube" target="_blank">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a class="social-btn whatsapp" href="https://api.whatsapp.com/send?text=https://example.com" title="WhatsApp" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a class="social-btn pinterest" href="https://pinterest.com/pin/create/button/?url=https://example.com" title="Pinterest" target="_blank">
+                            <i class="fab fa-pinterest-p"></i>
+                        </a>
+                        <a class="social-btn snapchat" href="https://www.snapchat.com" title="Snapchat" target="_blank">
+                            <i class="fab fa-snapchat-ghost"></i>
+                        </a>
+                        <a class="social-btn messenger" href="https://www.messenger.com/t/?link=https://example.com" title="Messenger" target="_blank">
+                            <i class="fab fa-facebook-messenger"></i>
+                        </a>
+                    </div>
+                </div>
+
             </div>
 
             <div style="display: flex;" class="img-box">
@@ -350,12 +430,20 @@
                         <use xlink:href="#icon-clinic-button"></use>
                     </svg>Kontakt</a>
             </div>
+
+
         </div>
 
         <div class="detail-rightside" id = "asidePage">
-
+            <aside class="detail-right" data-eusoft-scrollable-element="1" id = "aside_right">
+                <div class="most-read" data-eusoft-scrollable-element="1">
+                    <h2 class="common-tit">Affordable Housing Advice</h2>
+                    <ul class="most-list" id = "aside_list">
+                    </ul>
+            </aside>
         </div>
     </main>
+
     <div class="wishBarCover">
         <div class="wishBar">
             <div id="wishList">
@@ -720,12 +808,6 @@
             .then(data => {
                 document.getElementById('footer').innerHTML = data;
             });
-
-        fetch('./aside.html')
-            .then(res => res.text())
-            .then(data => {
-                document.getElementById('asidePage').innerHTML = data;
-            });
     </script>
 
     <script type="module">
@@ -783,11 +865,6 @@
   <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
 </svg> Immobilien：</p> ${data.supplier}
                     </div>
-                    <div class="boxMessage locationMessage">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-forward" viewBox="0 0 16 16">
-  <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877zm10.762.135a.5.5 0 0 1 .708 0l2.5 2.5a.5.5 0 0 1 0 .708l-2.5 2.5a.5.5 0 0 1-.708-.708L14.293 4H9.5a.5.5 0 0 1 0-1h4.793l-1.647-1.646a.5.5 0 0 1 0-.708"/>
-</svg> Tel：${data.tel}
-                    </div>
                 </div>
             `
 
@@ -829,8 +906,42 @@
             }
 
             document.getElementById('titleMessage').innerText = data.name
-            document.getElementById('cdkeyMessage').innerText = "Key:" + data.cdkey
+            //document.getElementById('cdkeyMessage').innerText = "Key:" + data.cdkey
             document.getElementById('backlast').href = "./list.html?"+urlGet
+
+
+            const mqqhtmlLink = window.location.href;
+
+            localStorage.setItem('mqqhtmlLink',mqqhtmlLink)
+
+            document.getElementById("shareDiv").innerHTML = `
+                <div class="social-share">
+  <a class="social-btn facebook" href="https://www.facebook.com/sharer/sharer.php?u=${mqqhtmlLink}" title="Facebook" target="_blank">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+  <a class="social-btn instagram" href="https://www.instagram.com" title="Instagram" target="_blank">
+    <i class="fab fa-instagram"></i>
+  </a>
+  <a class="social-btn twitter" href="https://twitter.com/intent/tweet?url=${mqqhtmlLink}" title="Twitter" target="_blank">
+    <i class="fab fa-twitter"></i>
+  </a>
+  <a class="social-btn youtube" href="https://www.youtube.com" title="YouTube" target="_blank">
+    <i class="fab fa-youtube"></i>
+  </a>
+  <a class="social-btn whatsapp" href="https://api.whatsapp.com/send?text=${mqqhtmlLink}" title="WhatsApp" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  <a class="social-btn pinterest" href="https://pinterest.com/pin/create/button/?url=${mqqhtmlLink}" title="Pinterest" target="_blank">
+    <i class="fab fa-pinterest-p"></i>
+  </a>
+  <a class="social-btn snapchat" href="https://www.snapchat.com" title="Snapchat" target="_blank">
+    <i class="fab fa-snapchat-ghost"></i>
+  </a>
+  <a class="social-btn messenger" href="https://www.messenger.com/t/?link=${mqqhtmlLink}" title="Messenger" target="_blank">
+    <i class="fab fa-facebook-messenger"></i>
+  </a>
+</div>
+            `
 
             if(data.msg.length > 10){
                 document.getElementById('message').innerHTML = `
@@ -866,11 +977,66 @@
         });
     </script>
 
+    <script type="module">
+        import { fetchRandomHousesByState, fetchDataById } from './Public/Js/dataGet.js';
+
+        async function init() {
+            const urlParams = new URLSearchParams(window.location.search);
+
+            let display_state = urlParams.get('state');
+            let display_city = urlParams.get('city');
+            let display_district = urlParams.get('district');
+
+            // 设定默认值，如果为 undefined 则默认一个州名，例如 'California'
+            if (!display_state) {
+                display_state = 'Berlin'; // 或你希望的默认值
+            }
+
+            const { data, error } = await fetchRandomHousesByState(display_state);
+
+            if (error) {
+                console.error("获取房源数据失败：", error.message);
+                return;
+            }
+
+            $(document).ready(function () {
+                let html = ``;
+
+                data.forEach(house => {
+                    const serverPic = "https://pub-57bc773ebbc24ef1be9f0d6d9681b286.r2.dev/" + house.mainpic + "/";
+                    const picsObj = JSON.parse(house.pics_jsonStr || "[]");
+
+                    html += `<li>
+                    <div class="most-box">
+                      <a href="./detail.html?id=${house.id}&state=${house.display_state}&city=${house.display_city}&district=${house.display_district}" class="href-item"></a>
+                      <img src="${serverPic + (picsObj[0] || '')}"
+                           alt="section-8-pays-for-your-rental-costs" class="most-img">
+                      <h5 class="most-tit">${house.name}</h5>
+                      <div class="most-bottom">
+                        <p class="most-content" data-eusoft-scrollable-element="1">${house.location}</p>
+                      </div>
+                      <h5 class="most-tit">${house.price} € Kaltmiete zzgl. NK</h5>
+                    </div>
+                  </li>`;
+                });
+
+                document.getElementById("aside_list").innerHTML = html;
+            });
+        }
+
+        init();
+    </script>
+
+
     <script>
         function toForm(){
             const urlParams = new URLSearchParams(window.location.search);
+            let display_state = urlParams.get('state');
+            let display_city = urlParams.get('city');
+            let display_district = urlParams.get('district');
             const id = urlParams.get('id');
-            window.location.href = './form.html?id=' + id;
+
+            window.location.href = `./form.html?id=${id}&state=${display_state}&city=${display_city}&district=${display_district}`;
         }
     </script>
 </body>

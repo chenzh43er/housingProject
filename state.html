@@ -29,8 +29,28 @@
         }
         @media screen and (max-width: 900px) {
             .select-state {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
             }
+        }
+
+        .selectLidiv{
+            border: 1px solid;border-radius: 10px;border-color: #eee;
+            padding: 10px;min-height: 50px;display: flex; align-items: center;
+            color: #333333
+        }
+
+        .selectLidiv a{
+            color: #333333
+        }
+
+        .selectLidiv:hover{
+            border: 1px solid;border-radius: 10px;border-color: #1174eb;
+            padding: 10px;min-height: 50px;display: flex; align-items: center;
+            color:#1174eb
+        }
+
+        .selectLidiv:hover a{
+            color: #1174eb
         }
 
 
@@ -97,10 +117,10 @@
                 </div>
             </div>
             <div class="select-box select-after">
-                <div class="prog"></div>
+                <div class="prog" data-eusoft-scrollable-element="1"></div>
                 <div class="step_box">
                     <svg class="icon_step">
-                        <use xlink:href="#icon-step1"></use>
+                        <use xlink:href="#icon-step3"></use>
                     </svg>
                     <div class="h4">Choose the apartment you love.</div>
                 </div>
@@ -329,9 +349,10 @@
         let innerStr = '';
         data.forEach(item => {
             innerStr += `<li>
-                <a href="./city.html?state=${item.display_state}">
-                ${item.display_state}
-                </a></li>`;
+                <a href="./city.html?state=${item.display_state}"><div class = "selectLidiv">
+                    ${item.display_state}
+                </div></a>
+                </li>`;
         });
 
         document.getElementById('select-state').innerHTML = innerStr;

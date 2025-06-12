@@ -10,6 +10,25 @@
     <link type="text/css" rel="stylesheet" href="./Public/Css/hs-style.css">
     <link type="text/css" rel="stylesheet" href="./Public/Css/lch-office.css">
     <script src="./Public/Js/utlParam.js"></script>
+    <style>
+
+        .suggestHouseUl {
+            display: grid;
+            grid-gap: 20px;
+        }
+
+        @media screen and (min-width: 500px) {
+            .suggestHouseUl {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media screen and (min-width: 500px) {
+            .suggestHouseUl {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -212,7 +231,7 @@
     </defs>
 </svg>
 <div class="contact-form"
-     style="max-width: 600px; margin: 0 auto; padding: 30px; background: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+     style="max-width: 600px; margin: 30px auto; padding: 30px; background: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
     <form>
         <div class="form-group" style="margin-bottom: 20px;">
             <label style="display: block; margin-bottom: 8px; font-weight: bold;">Anrede</label>
@@ -224,12 +243,6 @@
                 <input type="radio" id="other" name="title" value="女士" style="margin-right: 5px;">
                 <label for="ms">Divers</label>
             </div>
-        </div>
-
-        <div class="form-group" style="margin-bottom: 20px;">
-            <label for="name" style="display: block; margin-bottom: 8px; font-weight: bold;">Rent-Key</label>
-            <input type="text" id="rent-key" name="name" required
-                   style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
         </div>
 
         <div class="form-group" style="margin-bottom: 20px;">
@@ -245,12 +258,6 @@
         </div>
 
         <div class="form-group" style="margin-bottom: 20px;">
-            <label for="phone" style="display: block; margin-bottom: 8px; font-weight: bold;">Telefon(Optional)</label>
-            <input type="tel" id="phone" name="phone" required
-                   style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
-        </div>
-
-        <div class="form-group" style="margin-bottom: 20px;">
             <label for="message" style="display: block; margin-bottom: 8px; font-weight: bold;">Ich bin Eigentümer einer Immobilie</label>
             <textarea id="message" name="message" rows="4"
                       style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
@@ -261,6 +268,11 @@
             Kontaktanfrage senden
         </button>
     </form>
+</div>
+
+<div style="max-width: 600px; margin: 30px auto; padding: 30px; background: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <ul class="suggestHouseUl" id = "aside_list">
+    </ul>
 </div>
 
 <footer id = "footer">
@@ -481,7 +493,6 @@
     document.addEventListener('scroll', lazyload);
 
 </script>
-
 <script>
     window.addEventListener('pageshow', function (event) {
         if (event.persisted || (window.performance && window.performance.getEntriesByType && String(window.performance.getEntriesByType('navigation')[0].type) === 'back_forward')) {
@@ -586,6 +597,9 @@
     function submitForm() {
         const urlParams = new URLSearchParams(window.location.search);
         const id = urlParams.get('id');
+        let display_state = urlParams.get('state');
+        let display_city = urlParams.get('city');
+        let display_district = urlParams.get('district');
 
 
         const title = $('input[name="title"]:checked').val();
@@ -593,30 +607,58 @@
         const email = $('#email').val();
         const phone = $('#phone').val();
         const message = $('#message').val();
-        window.location.href = './result.html';
-        // $.ajax({
-        //     url: '/api/form',
-        //     method: 'POST',
-        //     data: {
-        //         id: id,
-        //         title: title,
-        //         name: name,
-        //         email: email,
-        //         phone: phone,
-        //         message: message
-        //     },
-        //     success: function(response) {
-        //         if(response.code == 0){
-        //             window.location.href = './result.html';
-        //         }else{
-        //             console.log('提交失败，请稍后重试');
-        //         }
-        //     },
-        //     error: function(xhr, status, error) {
-        //         console.log('提交失败，请稍后重试');
-        //     }
-        // });
+        window.location.href = `./result.html?id=${id}&state=${display_state}&city=${display_city}&district=${display_district}`;
     }
+</script>
+
+<script type="module">
+    import { fetchRandomHousesByState, fetchDataById } from './Public/Js/dataGet.js';
+
+    async function init() {
+        const urlParams = new URLSearchParams(window.location.search);
+
+        let display_state = urlParams.get('state');
+        let display_city = urlParams.get('city');
+        let display_district = urlParams.get('district');
+
+        // 设定默认值，如果为 undefined 则默认一个州名，例如 'California'
+        if (!display_state) {
+            display_state = 'Berlin'; // 或你希望的默认值
+        }
+
+        const { data, error } = await fetchRandomHousesByState(display_state,6);
+
+        if (error) {
+            console.error("获取房源数据失败：", error.message);
+            return;
+        }
+
+        $(document).ready(function () {
+            let html = ``;
+
+            data.forEach(house => {
+                const serverPic = "https://pub-57bc773ebbc24ef1be9f0d6d9681b286.r2.dev/" + house.mainpic + "/";
+                const picsObj = JSON.parse(house.pics_jsonStr || "[]");
+
+                html += `<li>
+                    <div class="most-box">
+                      <a href="./detail.html?id=${house.id}&state=${house.display_state}&city=${house.display_city}&district=${house.display_district}" class="href-item"></a>
+                      <img src="${serverPic + (picsObj[0] || '')}"
+                           alt="section-8-pays-for-your-rental-costs" class="most-img">
+                      <h5 class="most-tit">${house.name}</h5>
+                      <div class="most-bottom">
+                        <p class="most-content" data-eusoft-scrollable-element="1">${house.location}</p>
+                      </div>
+                      <h5 class="most-tit">${house.price} € Kaltmiete zzgl. NK</h5>
+                    </div>
+                  </li>`;
+            });
+
+            document.getElementById("aside_list").innerHTML = html;
+        });
+    }
+
+    init();
 </script>
 
 </body>
