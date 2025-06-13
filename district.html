@@ -505,7 +505,7 @@
                     <svg class="icon_step">
                         <use xlink:href="#icon-step1"></use>
                     </svg>
-                    <div class="h4">Alaska</div>
+                    <div class="h4" id = "state_label">Alaska</div>
                 </div>
             </div>
             <div class="select-box select-now">
@@ -514,7 +514,7 @@
                     <svg class="icon_step">
                         <use xlink:href="#icon-step2"></use>
                     </svg>
-                    <div class="h4">Choose your county.</div>
+                    <div class="h4" id = "city_label">Choose your city.</div>
                 </div>
             </div>
             <div class="select-box select-now">
@@ -807,6 +807,9 @@
     const params = new URLSearchParams(window.location.search);
     const display_state = params.get('state');
     const display_city = params.get('city');
+
+    document.getElementById("state_label").innerText = display_state
+    document.getElementById("city_label").innerText = display_city
 
     const {data, error} = await fetchDistrictsByCity(display_city);
 
