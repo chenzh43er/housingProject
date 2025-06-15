@@ -86,11 +86,24 @@
         .snapchat   { background-color: #fffc00; color: black; }
         .messenger  { background-color: #0084ff; }
 
+        .shareUl{
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            grid-gap: 10px;
+        }
+
         @media (max-width: 600px) {
             .social-btn {
                 width: 48px;
                 height: 48px;
                 font-size: 20px;
+            }
+
+            .shareUl{
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                grid-gap: 10px;
+                column-gap: 30px;
             }
         }
 
@@ -289,30 +302,48 @@
             const mqqhtmlLink = localStorage.getItem('mqqhtmlLink');
             document.getElementById("shareDiv").innerHTML = `
                 <div class="social-share">
+                <ul class="shareUl">
+                <li>
   <a class="social-btn facebook" href="https://www.facebook.com/sharer/sharer.php?u=${mqqhtmlLink}" title="Facebook" target="_blank">
     <i class="fab fa-facebook-f"></i>
   </a>
+  </li>
+   <li>
   <a class="social-btn instagram" href="https://www.instagram.com" title="Instagram" target="_blank">
     <i class="fab fa-instagram"></i>
   </a>
+</li>
+   <li>
   <a class="social-btn twitter" href="https://twitter.com/intent/tweet?url=${mqqhtmlLink}" title="Twitter" target="_blank">
     <i class="fab fa-twitter"></i>
   </a>
+</li>
+   <li>
   <a class="social-btn youtube" href="https://www.youtube.com" title="YouTube" target="_blank">
     <i class="fab fa-youtube"></i>
   </a>
+</li>
+   <li>
   <a class="social-btn whatsapp" href="https://api.whatsapp.com/send?text=${mqqhtmlLink}" title="WhatsApp" target="_blank">
     <i class="fab fa-whatsapp"></i>
   </a>
+</li>
+   <li>
   <a class="social-btn pinterest" href="https://pinterest.com/pin/create/button/?url=${mqqhtmlLink}" title="Pinterest" target="_blank">
     <i class="fab fa-pinterest-p"></i>
   </a>
+</li>
+   <li>
   <a class="social-btn snapchat" href="https://www.snapchat.com" title="Snapchat" target="_blank">
     <i class="fab fa-snapchat-ghost"></i>
   </a>
+</li>
+   <li>
   <a class="social-btn messenger" href="https://www.messenger.com/t/?link=${mqqhtmlLink}" title="Messenger" target="_blank">
     <i class="fab fa-facebook-messenger"></i>
   </a>
+  </li>
+  </ul>
 </div>
             `
         });
