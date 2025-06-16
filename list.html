@@ -15,6 +15,7 @@
     <script src="./Public/Js/jquery-3.0.0.min.js"></script>
     <script src="./Public/Js/pagination.min.js"></script>
     <script src="./Public/Js/utlParam.js"></script>
+    <script src="./Public/Js/common.js"></script>
     <style>
         .state-address {
             display: flex;
@@ -251,15 +252,13 @@
                     </span>
 
                 </div>
-                <h1 class="title" data-eusoft-scrollable-element="1">Find Affordable Housing</h1>
+                <h1 class="title" data-eusoft-scrollable-element="1" id = "title_find">Bezahlbaren Wohnraum finden</h1>
             </div>
             <div class="adswp" style="height: auto !important;" data-eusoft-scrollable-element="1">
-                <div class="advertisement" data-eusoft-scrollable-element="1">Advertisement</div>
-
             </div>
             <div class="sub-box">
                 <h4 class="sub-content">
-                    <span id="total">26</span> Apartments Nearby
+                    <span id="total">26</span> <span id="total_text">Wohnungen in der Nähe</span>
                 </h4>
             </div>
             <ul class="statelists" style="font-size: 0">
@@ -274,7 +273,7 @@
         <div class="detail-rightside" id = "asidePage">
             <aside class="detail-right" data-eusoft-scrollable-element="1" id = "aside_right">
                 <div class="most-read" data-eusoft-scrollable-element="1">
-                    <h2 class="common-tit">Affordable Housing Advice</h2>
+                    <h2 class="common-tit" id = "aside_text">Beratungsdienst für bezahlbaren Wohnraum</h2>
                     <ul class="most-list" id = "aside_list">
                     </ul>
             </aside>
@@ -657,6 +656,21 @@
         // 调用初始化函数
         init();
 
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            const lang = getLangFromPath()
+            console.log(lang)
+            if(lang == "de"){
+
+            }else
+            {
+                document.getElementById("title_find").innerText="Bezahlbaren Wohnraum finden"
+                document.getElementById("total_text").innerText="Wohnungen in der Nähe"
+                document.getElementById("aside_text").innerText="Beratungsdienst für bezahlbaren Wohnraum"
+            }
+        });
     </script>
 
 </body>

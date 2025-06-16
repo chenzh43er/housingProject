@@ -11,7 +11,7 @@
     <link type="text/css" rel="stylesheet" href="./Public/Css/lch-office.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script src="./Public/Js/utlParam.js"></script>
-
+    <script src="./Public/Js/common.js"></script>
 </head>
 <style>
     .modal {
@@ -436,12 +436,12 @@
                 <a class="next-clinic-btn" id = "backlast"><svg class="icon-clinic-button"
                         style="transform: translateY(-1px) rotate(180deg); fill: #1173eb">
                         <use xlink:href="#icon-clinic-button"></use>
-                    </svg>Back to List</a>
+                </svg><span id = "lang_back">Back to List</span></a>
                 <a href="javascript:;" onclick="toForm()"
                     class="next-clinic-btn next-clinic-blue" data-eusoft-scrollable-element="1"><svg
                         class="icon-clinic-button">
                         <use xlink:href="#icon-clinic-button"></use>
-                    </svg>Kontakt</a>
+                </svg><span id = "lang_submit">Kontakt</span></a>
             </div>
 
 
@@ -450,7 +450,7 @@
         <div class="detail-rightside" id = "asidePage">
             <aside class="detail-right" data-eusoft-scrollable-element="1" id = "aside_right">
                 <div class="most-read" data-eusoft-scrollable-element="1">
-                    <h2 class="common-tit">Affordable Housing Advice</h2>
+                    <h2 class="common-tit" id = "aside_text">Affordable Housing Advice</h2>
                     <ul class="most-list" id = "aside_list">
                     </ul>
             </aside>
@@ -1069,6 +1069,21 @@
 
             window.location.href = `./form.html?id=${id}&state=${display_state}&city=${display_city}&district=${display_district}`;
         }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            const lang = getLangFromPath()
+            console.log(lang)
+            if(lang == "de"){
+
+            }else
+            {
+                document.getElementById("aside_text").innerText="Beratungsdienst für bezahlbaren Wohnraum"
+                document.getElementById("lang_back").innerText="Zurück zur Liste"
+                document.getElementById("lang_submit").innerText="Kontakt"
+            }
+        })
     </script>
 </body>
 

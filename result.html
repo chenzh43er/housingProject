@@ -11,6 +11,7 @@
     <link type="text/css" rel="stylesheet" href="./Public/Css/lch-office.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script src="./Public/Js/utlParam.js"></script>
+    <script src="./Public/Js/common.js"></script>
     <style>
         .success-wrap {
             display: flex;
@@ -135,8 +136,8 @@
     <div class="success-wrap">
         <div class="success-content">
             <div class="success-icon">✓</div>
-            <div class="success-text">Erfolgreich eingereicht</div>
-            <div class="back-btn" onclick="returnToList()">Zurück zur Startseite</div>
+            <div class="success-text" id = "lang_succeed">Erfolgreich eingereicht</div>
+            <div class="back-btn" onclick="returnToList()" id = "lang_back">Zurück zur Startseite</div>
         </div>
     </div>
 
@@ -397,6 +398,19 @@
         }
 
         init();
+    </script>
+    <script>
+        $(document).ready(function () {
+            const lang = getLangFromPath()
+            console.log(lang)
+            if(lang == "de"){
+
+            }else
+            {
+                document.getElementById("lang_succeed").innerText="Erfolgreich eingereicht"
+                document.getElementById("lang_back").innerText="Zurück zur Startseite"
+            }
+        })
     </script>
 </body>
 </html>
