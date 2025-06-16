@@ -1,0 +1,416 @@
+<html lang="en" dir="ltr" data-eusoft-scrollable-element="1">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Homeonbudget Submit Result</title>
+    <meta name="description"
+        content="Find detailed information on Chugach View, including address, phone number, services, and more.">
+    <link type="text/css" rel="stylesheet" href="./Public/Css/hs-style.css">
+    <link type="text/css" rel="stylesheet" href="./Public/Css/lch-office.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="./Public/Js/utlParam.js"></script>
+    <script src="./Public/Js/common.js"></script>
+    <style>
+        .success-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+        }
+        .success-content {
+            text-align: center;
+        }
+        .success-icon {
+            font-size: 48px;
+            color: #52c41a;
+            margin-bottom: 16px;
+        }
+        .success-text {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 24px;
+        }
+        .back-btn {
+            display: inline-block;
+            padding: 8px 24px;
+            background: #1890ff;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .back-btn:hover {
+            background: #40a9ff;
+        }
+
+        .share-title {
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .social-share {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        .social-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            color: white;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .social-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        /* Platform-specific colors */
+        .facebook   { background-color: #3b5998; }
+        .instagram  { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+        .twitter    { background-color: #1da1f2; }
+        .youtube    { background-color: #ff0000; }
+        .whatsapp   { background-color: #25d366; }
+        .pinterest  { background-color: #bd081c; }
+        .snapchat   { background-color: #fffc00; color: black; }
+        .messenger  { background-color: #0084ff; }
+
+        .shareUl{
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            grid-gap: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .social-btn {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+            }
+
+            .shareUl{
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                grid-gap: 10px;
+                column-gap: 30px;
+            }
+        }
+
+        .suggestHouseUl {
+            display: grid;
+            grid-gap: 20px;
+        }
+
+        @media screen and (min-width: 500px) {
+            .suggestHouseUl {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media screen and (min-width: 500px) {
+            .suggestHouseUl {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header data-eusoft-scrollable-element="1" id = "header">
+    </header>
+
+
+    <div class="success-wrap">
+        <div class="success-content">
+            <div class="success-icon">✓</div>
+            <div class="success-text" id = "lang_succeed">Erfolgreich eingereicht</div>
+            <div class="back-btn" onclick="returnToList()" id = "lang_back">Zurück zur Startseite</div>
+        </div>
+    </div>
+
+    <div id = "shareDiv">
+        <div class="social-share">
+            <a class="social-btn facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://example.com" title="Facebook" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a class="social-btn instagram" href="https://www.instagram.com" title="Instagram" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a class="social-btn twitter" href="https://twitter.com/intent/tweet?url=https://example.com" title="Twitter" target="_blank">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a class="social-btn youtube" href="https://www.youtube.com" title="YouTube" target="_blank">
+                <i class="fab fa-youtube"></i>
+            </a>
+            <a class="social-btn whatsapp" href="https://api.whatsapp.com/send?text=https://example.com" title="WhatsApp" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a class="social-btn pinterest" href="https://pinterest.com/pin/create/button/?url=https://example.com" title="Pinterest" target="_blank">
+                <i class="fab fa-pinterest-p"></i>
+            </a>
+            <a class="social-btn snapchat" href="https://www.snapchat.com" title="Snapchat" target="_blank">
+                <i class="fab fa-snapchat-ghost"></i>
+            </a>
+            <a class="social-btn messenger" href="https://www.messenger.com/t/?link=https://example.com" title="Messenger" target="_blank">
+                <i class="fab fa-facebook-messenger"></i>
+            </a>
+        </div>
+    </div>
+
+    <div style="max-width: 600px; margin: 30px auto; padding: 30px; background: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+        <ul class="suggestHouseUl" id = "aside_list">
+        </ul>
+    </div>
+
+    <footer id = "footer">
+    </footer>
+
+    <script src="./Public/Js/jquery-3.0.0.min.js"></script>
+
+    <script>
+        window.addEventListener('pageshow', function (event) {
+            if (event.persisted || (window.performance && window.performance.getEntriesByType && String(window.performance.getEntriesByType('navigation')[0].type) === 'back_forward')) {
+                location.reload();
+            }
+        });
+        jQuery(document).ready(function () {
+            updateClassAndTableName()
+            $(".like").click(function () {
+                //login to use save function
+                if (localStorage.userInfo !== undefined) {
+                    //if has remove class, localStorage remove an item, class turn to like
+                    if ($(this).hasClass("remove")) {
+                        $(this).removeClass("remove");
+                    }
+                    // if don't have remove class, like class add remove class, get infomation and create a new table row, save it to localStorage
+                    else {
+                        $(this).addClass("remove");
+                        $(".if_none").hide()
+                        var eleTop = $(this).offset().top - $(document).scrollTop();
+                        var eleLeft = $(this).offset().left;
+                        var likeTop = $(".shortListButton").offset().top - $(document).scrollTop();
+                        var likeLeft = $(".shortListButton").offset().left;
+                        tranlateY = likeTop - eleTop + 10;
+                        tranlateX = likeLeft - eleLeft + 10;
+                        var eleFly = $(this).children(".add-fly");
+                        var eleFlyItem = eleFly.children(".add-fly-item");
+                        eleFly.css("visibility", "visible")
+                        eleFly.css("transform", "translateX(" + tranlateX + "px)");
+                        eleFlyItem.css("transform", "translateY(" + tranlateY + "px)");
+                        // $(".icon-cacl").css("transform", "scale(1.2)");
+                        setTimeout(function () {
+                            eleFly.css({ "visibility": "hidden", "transform": "translateX(" + 0 + "px)" });
+                            eleFlyItem.css("transform", "translateY(" + 0 + "px)");
+                        }, 290);
+                    }
+                    var txt = $(".title").text();
+                    var href = window.location.pathname;
+                    refresh(txt, href);
+                    updateClassAndTableName();
+                    console.log("update for click like")
+                } else {
+                    $("#login").css('display', 'block')
+                }
+            });
+
+            function updateClassAndTableName() {
+                var clinicMark = localStorage.getItem('clinicMark');
+                if (clinicMark) {
+                    var items = JSON.parse(clinicMark);
+                    $(".total").text(items.length);
+                    //add remove class
+                    $(".detail-left .title_box .title").each(function () {
+                        var name = $(this).text();
+                        var href = window.location.pathname;
+                        // Check if the name exists in the items array
+                        var exists = items.some(function (item) {
+                            return item.txt === name && item.href === href;
+                        });
+                        if (exists) {
+                            var element = $(this).parents(".detail-left").find(".like")
+                            element.addClass("remove");
+                            console.log("add remove class", element)
+                        }
+                    });
+                }
+                console.log("update class and table name")
+            }
+            function refresh(txt, href) {
+                var existingItems = localStorage.getItem("clinicMark")
+                    ? JSON.parse(localStorage.getItem("clinicMark"))
+                    : [];
+                // console.log(existingItems);
+                var index = existingItems.findIndex(item => item.txt === txt && item.href === href)
+                if (index !== -1) {
+                    // Item already exists, remove it
+                    existingItems.splice(index, 1);
+                    console.log("Item already exists, remove it", existingItems)
+                } else {
+                    // Item does not exist, add it
+                    existingItems.push({ txt: txt, href: href });
+                    console.log("Item does not exist, add it", existingItems)
+                }
+                localStorage.setItem("clinicMark", JSON.stringify(existingItems));
+
+            }
+        })
+
+
+        function returnToList(){
+
+            const urlParams = new URLSearchParams(window.location.search);
+
+            let display_state = urlParams.get('state');
+            let display_city = urlParams.get('city');
+            let display_district = urlParams.get('district');
+
+
+            window.location.href = `./list.html?state=${display_state}&city=${display_city}&district=${display_district}`;
+        }
+    </script>
+
+    <script>
+        // 加载 header
+        fetch('./header.html')
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById('header').innerHTML = data;
+            });
+
+        // 加载 footer
+        fetch('./footer.html')
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById('footer').innerHTML = data;
+            });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            const mqqhtmlLink = localStorage.getItem('mqqhtmlLink');
+            document.getElementById("shareDiv").innerHTML = `
+                <div class="social-share">
+                <ul class="shareUl">
+                <li>
+  <a class="social-btn facebook" href="https://www.facebook.com/sharer/sharer.php?u=${mqqhtmlLink}" title="Facebook" target="_blank">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+  </li>
+   <li>
+  <a class="social-btn instagram" href="https://www.instagram.com" title="Instagram" target="_blank">
+    <i class="fab fa-instagram"></i>
+  </a>
+</li>
+   <li>
+  <a class="social-btn twitter" href="https://twitter.com/intent/tweet?url=${mqqhtmlLink}" title="Twitter" target="_blank">
+    <i class="fab fa-twitter"></i>
+  </a>
+</li>
+   <li>
+  <a class="social-btn youtube" href="https://www.youtube.com" title="YouTube" target="_blank">
+    <i class="fab fa-youtube"></i>
+  </a>
+</li>
+   <li>
+  <a class="social-btn whatsapp" href="https://api.whatsapp.com/send?text=${mqqhtmlLink}" title="WhatsApp" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+</li>
+   <li>
+  <a class="social-btn pinterest" href="https://pinterest.com/pin/create/button/?url=${mqqhtmlLink}" title="Pinterest" target="_blank">
+    <i class="fab fa-pinterest-p"></i>
+  </a>
+</li>
+   <li>
+  <a class="social-btn snapchat" href="https://www.snapchat.com" title="Snapchat" target="_blank">
+    <i class="fab fa-snapchat-ghost"></i>
+  </a>
+</li>
+   <li>
+  <a class="social-btn messenger" href="https://www.messenger.com/t/?link=${mqqhtmlLink}" title="Messenger" target="_blank">
+    <i class="fab fa-facebook-messenger"></i>
+  </a>
+  </li>
+  </ul>
+</div>
+            `
+        });
+    </script>
+
+    <script type="module">
+        import { fetchRandomHousesByState, fetchDataById } from './Public/Js/dataGet.js';
+
+        async function init() {
+            const urlParams = new URLSearchParams(window.location.search);
+
+            let display_state = urlParams.get('state');
+            let display_city = urlParams.get('city');
+            let display_district = urlParams.get('district');
+
+            // 设定默认值，如果为 undefined 则默认一个州名，例如 'California'
+            if (!display_state) {
+                display_state = 'Berlin'; // 或你希望的默认值
+            }
+
+            const { data, error } = await fetchRandomHousesByState(display_state,6);
+
+            if (error) {
+                console.error("获取房源数据失败：", error.message);
+                return;
+            }
+
+            $(document).ready(function () {
+                let html = ``;
+
+                data.forEach(house => {
+                    const serverPic = "https://pub-57bc773ebbc24ef1be9f0d6d9681b286.r2.dev/" + house.mainpic + "/";
+                    const picsObj = JSON.parse(house.pics_jsonStr || "[]");
+
+                    html += `<li>
+                    <div class="most-box">
+                      <a href="./detail.html?id=${house.id}&state=${house.display_state}&city=${house.display_city}&district=${house.display_district}" class="href-item"></a>
+                      <img src="${serverPic + (picsObj[0] || '')}"
+                           alt="section-8-pays-for-your-rental-costs" class="most-img">
+                      <h5 class="most-tit">${house.name}</h5>
+                      <div class="most-bottom">
+                        <p class="most-content" data-eusoft-scrollable-element="1">${house.location}</p>
+                      </div>
+                      <h5 class="most-tit">${house.price} € Kaltmiete zzgl. NK</h5>
+                    </div>
+                  </li>`;
+                });
+
+                document.getElementById("aside_list").innerHTML = html;
+            });
+        }
+
+        init();
+    </script>
+    <script>
+        $(document).ready(function () {
+            const lang = getLangFromPath()
+            console.log(lang)
+            if(lang == "de"){
+
+            }else
+            {
+                document.getElementById("lang_succeed").innerText="Erfolgreich eingereicht"
+                document.getElementById("lang_back").innerText="Zurück zur Startseite"
+            }
+        })
+    </script>
+</body>
+</html>
