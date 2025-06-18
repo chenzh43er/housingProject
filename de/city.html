@@ -803,7 +803,7 @@
             const lang = getLangFromPath()
             console.log(lang)
             if(lang == "de"){
-
+                document.getElementById("lang_index").innerText="Startseite"
             }else
             {
                 document.getElementById("lang_index").innerText="Startseite"
@@ -824,7 +824,7 @@
             const lang = getLangFromPath()
             console.log(lang)
             if(lang == "de"){
-
+                document.getElementById("aside_text").innerText="Beratungsdienst für bezahlbaren Wohnraum"
             }else
             {
                 document.getElementById("aside_text").innerText="Beratungsdienst für bezahlbaren Wohnraum"
@@ -865,7 +865,12 @@ ${item.display_city}</div>
         const lang = getLangFromPath()
         console.log(lang)
         if(lang == "de"){
+            document.getElementById("title_find").innerText="Bezahlbaren Wohnraum finden"
+            document.getElementById("aside_text").innerText="Beratungsdienst für bezahlbaren Wohnraum"
 
+            document.getElementById("lang_city").innerText="Stadt auswählen"
+            document.getElementById("lang_district").innerText="Bezirk auswählen"
+            document.getElementById("lang_apartment").innerText="Wählen Sie die Wohnung, die Sie lieben."
         }else
         {
             document.getElementById("title_find").innerText="Bezahlbaren Wohnraum finden"

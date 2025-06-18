@@ -508,7 +508,7 @@
                 const lang = getLangFromPath()
                 console.log(lang)
                 if(lang == "de"){
-
+                    document.getElementById("lang_index").innerText="Startseite"
                 }else
                 {
                     document.getElementById("lang_index").innerText="Startseite"
@@ -672,7 +672,9 @@
             const lang = getLangFromPath()
             console.log(lang)
             if(lang == "de"){
-
+                document.getElementById("title_find").innerText="Bezahlbaren Wohnraum finden"
+                document.getElementById("total_text").innerText="Wohnungen in der Nähe"
+                document.getElementById("aside_text").innerText="Beratungsdienst für bezahlbaren Wohnraum"
             }else
             {
                 document.getElementById("title_find").innerText="Bezahlbaren Wohnraum finden"
