@@ -60,6 +60,12 @@
         .selectLidiv:hover a{
             color: #1174eb
         }
+
+        .divider-wrap{
+            grid-column: 1 / -1; /* 占满整行 */
+            text-align: center;
+        }
+
     </style>
 </head>
 
@@ -509,7 +515,8 @@
             </div>
             <h1 class="title" data-eusoft-scrollable-element="1" id = "title_find">Find Affordable Housing</h1>
         </div>
-        <div class="adswp" style="height: auto !important;" data-eusoft-scrollable-element="1">
+        <div class="adswp" style="height: auto !important;" data-eusoft-scrollable-element="1" id="state_adv1">
+
         </div>
 
         <div class="select-text">
@@ -845,13 +852,16 @@
         document.getElementById("state_label").innerText = display_state
 
         let innerStr = '';
-        data.forEach(item => {
+        data.forEach((item,index)  => {
             innerStr += `<li>
 <a href="./district.html?state=${display_state}&city=${item.display_city}">
 <div class = "selectLidiv">
 ${item.display_city}</div>
 </a>
 </li>`;
+            if((index+1) % 8 == 0){
+                innerStr += `<li class = "divider-wrap"><div>${returnAdvWord()}</div></li>`
+            }
         });
 
         document.getElementById('select-state').innerHTML = innerStr;
@@ -881,6 +891,12 @@ ${item.display_city}</div>
             document.getElementById("lang_apartment").innerText="Wählen Sie die Wohnung, die Sie lieben."
         }
     });
+</script>
+
+<script>
+    $(document).ready(function () {
+        document.getElementById("state_adv1").innerHTML = returnAdvWord()
+    })
 </script>
 
 </body>

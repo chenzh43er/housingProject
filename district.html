@@ -60,6 +60,11 @@
         .selectLidiv:hover a{
             color: #1174eb
         }
+
+        .divider-wrap{
+            grid-column: 1 / -1; /* 占满整行 */
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -493,7 +498,7 @@
             </div>
             <h1 class="title" data-eusoft-scrollable-element="1" id = "title_find">Find Affordable Housing</h1>
         </div>
-        <div class="adswp" style="height: auto !important;" data-eusoft-scrollable-element="1">
+        <div class="adswp" style="height: auto !important;" data-eusoft-scrollable-element="1" id="state_adv1">
         </div>
 
 
@@ -529,7 +534,7 @@
                 <div class="prog" data-eusoft-scrollable-element="1"></div>
                 <div class="step_box">
                     <svg class="icon_step">
-                        <use xlink:href="#icon-step4"></use>
+                        <use xlink:href="#icon-step1"></use>
                     </svg>
                     <div class="h4" id = "lang_apartment">Choose the apartment you love.</div>
                 </div>
@@ -832,13 +837,17 @@
     $(document).ready(function () {
 
         let innerStr = '';
-        data.forEach(item => {
+        data.forEach((item,index) => {
             innerStr += `
                 <li>
                     <a href="./list.html?state=${display_state}&city=${display_city}&district=${item.display_district}">
                        <div class = "selectLidiv"> ${item.display_district}</div>
                     </a>
                 </li>`;
+
+            if((index+1) % 8 == 0){
+                innerStr += `<li class = "divider-wrap"><div>${returnAdvWord()}</div></li>`
+            }
         });
 
         document.getElementById('select-state').innerHTML = innerStr;
@@ -865,6 +874,12 @@
             document.getElementById("lang_apartment").innerText="Wählen Sie die Wohnung, die Sie lieben."
         }
     });
+</script>
+
+<script>
+    $(document).ready(function () {
+        document.getElementById("state_adv1").innerHTML = returnAdvWord()
+    })
 </script>
 
 </body>

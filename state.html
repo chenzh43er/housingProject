@@ -55,6 +55,11 @@
             color: #1174eb
         }
 
+        .divider-wrap{
+            grid-column: 1 / -1; /* 占满整行 */
+            text-align: center;
+        }
+
 
     </style>
 </head>
@@ -86,7 +91,8 @@
             </div>
             <h1 class="title" data-eusoft-scrollable-element="1" id = "title_find">Find Affordable Housing</h1>
         </div>
-        <div class="adswp" style="height: auto !important;" data-eusoft-scrollable-element="1">
+        <div class="adswp" style="height: auto !important;" data-eusoft-scrollable-element="1" id="state_adv1">
+            Advertise
         </div>
 
         <div class="select-text">
@@ -151,6 +157,7 @@
 </footer>
 
 <script src="./Public/Js/jquery-3.0.0.min.js"></script>
+
 <script>
     document.getElementById("year").textContent = new Date().getFullYear();
     var loginStatus = false
@@ -365,12 +372,16 @@
 
     $(document).ready(function() {
         let innerStr = '';
-        data.forEach(item => {
+        data.forEach((item,index) => {
             innerStr += `<li>
                 <a href="./city.html?state=${item.display_state}"><div class = "selectLidiv">
                     ${item.display_state}
                 </div></a>
                 </li>`;
+
+            if((index+1) % 8 == 0){
+                innerStr += `<li class = "divider-wrap"><div>${returnAdvWord()}</div></li>`
+            }
         });
 
         document.getElementById('select-state').innerHTML = innerStr;
@@ -402,6 +413,12 @@
             document.getElementById("lang_apartment").innerText="Wählen Sie die Wohnung, die Sie lieben."
         }
     });
+</script>
+
+<script>
+    $(document).ready(function () {
+        document.getElementById("state_adv1").innerHTML = returnAdvWord()
+    })
 </script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
