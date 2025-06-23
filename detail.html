@@ -333,19 +333,42 @@
             <div class="title_box" data-eusoft-scrollable-element="1">
                 <div class="bread_crumbs" itemscope="" itemtype="http://schema.org/BreadcrumbList">
                     <span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-                        <a href="/" itemprop="item"><i itemprop="name">Home</i></a>
+                        <a href="./index.html" itemprop="item"><i itemprop="name" id = "lang_item1">Home</i></a>
                         <meta itemprop="position" content="1">
                     </span>
 
                     <span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
                         <span class="bread-crumbs-icon">/</span>
-                        <a href="#" itemprop="item" class="cur-bread-crumbs">
+                        <a href="./state.html" itemprop="item" class="cur-bread-crumbs">
+                            <i itemprop="name" id = "lang_item2">Affordable Housing</i>
+                        </a>
+                        <meta itemprop="position" content="2">
+                    </span>
+                </div>
+
+                <div class="bread_crumbs" itemscope="" itemtype="http://schema.org/BreadcrumbList" id = "locate_search">
+                    <span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                        <a href="./state.html" itemprop="item" class="cur-bread-crumbs">
+                            <i itemprop="name">Affordable Housing</i>
+                        </a>
+                        <meta itemprop="position" content="1">
+                    </span>
+                    <span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                        <span class="bread-crumbs-icon">/</span>
+                        <a href="./state.html" itemprop="item" class="cur-bread-crumbs">
                             <i itemprop="name">Affordable Housing</i>
                         </a>
                         <meta itemprop="position" content="2">
                     </span>
                 </div>
+
+
+
                 <h1 class="title" data-eusoft-scrollable-element="1" id="titleMessage"></h1>
+
+                <div class="adswp" style="height: auto !important;" data-eusoft-scrollable-element="1" id="detail_adv1">
+                    Advertise
+                </div>
 
                 <div id = "shareDiv">
                     <div class="social-share">
@@ -442,6 +465,10 @@
                         class="icon-clinic-button">
                         <use xlink:href="#icon-clinic-button"></use>
                 </svg><span id = "lang_submit">Kontakt</span></a>
+            </div>
+
+            <div class="adswp" style="height: auto !important;" data-eusoft-scrollable-element="1" id="detail_adv2">
+                Advertise
             </div>
 
 
@@ -1040,7 +1067,9 @@
             }
 
             $(document).ready(function () {
-                let html = ``;
+                let html = `<li class="statelists-imgli">
+                        ${returnAdvWord()}
+                </li>`;
 
                 data.forEach(house => {
                     const serverPic = "https://pub-57bc773ebbc24ef1be9f0d6d9681b286.r2.dev/" + house.mainpic + "/";
@@ -1059,6 +1088,34 @@
                     </div>
                   </li>`;
                 });
+
+                if(display_district && display_city && display_state){
+                    console.log("ALL")
+
+                    document.getElementById("locate_search").innerHTML=`<span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                        <a href="./state.html" itemprop="item" class="cur-bread-crumbs" >
+                            <i itemprop="name" style="color: #1174eb;">${display_state}</i>
+                        </a>
+                        <meta itemprop="position" content="1">
+                    </span>
+                    <span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                        <span class="bread-crumbs-icon">/</span>
+                        <a href="./city.html?state=${display_state}" itemprop="item" class="cur-bread-crumbs">
+                            <i itemprop="name" style="color: #1174eb;">${display_city}</i>
+                        </a>
+                        <meta itemprop="position" content="2">
+                    </span>
+                    <span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                        <span class="bread-crumbs-icon">/</span>
+                        <a href="./district.html?state=${display_state}&city=${display_city}" itemprop="item" class="cur-bread-crumbs">
+                            <i itemprop="name" style="color: #1174eb;">${display_district}</i>
+                        </a>
+                        <meta itemprop="position" content="2">
+                    </span>`
+
+                }
+
+
 
                 document.getElementById("aside_list").innerHTML = html;
             });
@@ -1094,6 +1151,13 @@
                 document.getElementById("lang_back").innerText="Zurück zur Liste"
                 document.getElementById("lang_submit").innerText="Kontakt"
             }
+        })
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            document.getElementById("detail_adv1").innerHTML = returnAdvWord()
+            document.getElementById("detail_adv2").innerHTML = returnAdvWord()
         })
     </script>
 </body>

@@ -236,22 +236,43 @@
 
     <main class="wrapper contents no-sidebar" style="height: auto !important; min-height: 0px !important;">
         <div class="detail-left" style="height: auto !important;" data-eusoft-scrollable-element="1">
+
+            <div class="adswp" style="height: auto !important;" data-eusoft-scrollable-element="1" id="list_adv1">
+                Advertise
+            </div>
+
             <div class="title_box" data-eusoft-scrollable-element="1">
                 <div class="bread_crumbs" itemscope="" itemtype="http://schema.org/BreadcrumbList">
                     <span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-                        <a href="/" itemprop="item"><i itemprop="name">Home</i></a>
+                        <a href="./index.html" itemprop="item"><i itemprop="name" id = "lang_item1">Home</i></a>
                         <meta itemprop="position" content="1">
                     </span>
 
                     <span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
                         <span class="bread-crumbs-icon">/</span>
-                        <a href="#" itemprop="item" class="cur-bread-crumbs">
+                        <a href="./state.html" itemprop="item" class="cur-bread-crumbs">
+                            <i itemprop="name" id = "lang_item2">Affordable Housing</i>
+                        </a>
+                        <meta itemprop="position" content="2">
+                    </span>
+                </div>
+
+                <div class="bread_crumbs" itemscope="" itemtype="http://schema.org/BreadcrumbList" id = "locate_search">
+                    <span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                        <a href="./state.html" itemprop="item" class="cur-bread-crumbs">
+                            <i itemprop="name">Affordable Housing</i>
+                        </a>
+                        <meta itemprop="position" content="1">
+                    </span>
+                    <span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                        <span class="bread-crumbs-icon">/</span>
+                        <a href="./state.html" itemprop="item" class="cur-bread-crumbs">
                             <i itemprop="name">Affordable Housing</i>
                         </a>
                         <meta itemprop="position" content="2">
                     </span>
-
                 </div>
+
                 <h1 class="title" data-eusoft-scrollable-element="1" id = "title_find">Bezahlbaren Wohnraum finden</h1>
             </div>
             <div class="adswp" style="height: auto !important;" data-eusoft-scrollable-element="1">
@@ -261,7 +282,7 @@
                     <span id="total">26</span> <span id="total_text">Wohnungen in der Nähe</span>
                 </h4>
             </div>
-            <ul class="statelists" style="font-size: 0">
+            <ul class="statelists">
 
             </ul>
 
@@ -554,7 +575,7 @@
             document.getElementById('total').innerText = totalCount;
 
             let html = '';
-            data.forEach(house => {
+            data.forEach((house,index) => {
                 const serverPic = "https://pub-57bc773ebbc24ef1be9f0d6d9681b286.r2.dev/" + house.mainpic + "/";
                 const picsObj = JSON.parse(house.pics_jsonStr || "[]");
 
@@ -577,14 +598,48 @@
                             </div>
                             <div class="most-bottom">
                                 <div class="most-left">
-                                    $${house.price} Kaltmiete zzgl. NK
+                                    ${house.price} Kaltmiete zzgl. NK
                                 </div>
                             </div>
                         </div>
                     </div>
                 </li>
             </a>`;
+
+                if((index +1 ) % 3 == 0 ){
+                    html += `
+                <li class="statelists-imgli">
+                        ${returnAdvWord()}
+                </li>`
+                }
+
             });
+
+            if(display_district && display_city && display_state){
+                console.log("ALL")
+
+                document.getElementById("locate_search").innerHTML=`<span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                        <a href="./state.html" itemprop="item" class="cur-bread-crumbs" style="color: color: #1174eb;">
+                            <i itemprop="name" style="color: #1174eb;">${display_state}</i>
+                        </a>
+                        <meta itemprop="position" content="1">
+                    </span>
+                    <span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                        <span class="bread-crumbs-icon">/</span>
+                        <a href="./city.html?state=${display_state}" itemprop="item" class="cur-bread-crumbs" style="color: color: #1174eb;">
+                            <i itemprop="name" style="color: #1174eb;">${display_city}</i>
+                        </a>
+                        <meta itemprop="position" content="2">
+                    </span>
+                    <span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                        <span class="bread-crumbs-icon">/</span>
+                        <a href="./district.html?state=${display_state}&city=${display_city}" itemprop="item" class="cur-bread-crumbs" style="color: color: #1174eb;">
+                            <i itemprop="name" style="color: #1174eb;">${display_district}</i>
+                        </a>
+                        <meta itemprop="position" content="2">
+                    </span>`
+
+            }
 
             $('.statelists').html(html);
             document.body.style.display = "block";
@@ -637,7 +692,10 @@
 
             $(document).ready(function () {
 
-                let html = ``
+                let html =  `
+                <li class="statelists-imgli">
+                        ${returnAdvWord()}
+                </li>`
 
                 data.forEach(house => {
                     const serverPic = "https://pub-57bc773ebbc24ef1be9f0d6d9681b286.r2.dev/" + house.mainpic + "/";
@@ -675,13 +733,30 @@
                 document.getElementById("title_find").innerText="Bezahlbaren Wohnraum finden"
                 document.getElementById("total_text").innerText="Wohnungen in der Nähe"
                 document.getElementById("aside_text").innerText="Beratungsdienst für bezahlbaren Wohnraum"
+
+                document.getElementById("lang_item1").innerText="Startseite"
+
+                document.getElementById("lang_item2").innerText="Bezahlbare Wohnungen"
+
             }else
             {
                 document.getElementById("title_find").innerText="Bezahlbaren Wohnraum finden"
                 document.getElementById("total_text").innerText="Wohnungen in der Nähe"
                 document.getElementById("aside_text").innerText="Beratungsdienst für bezahlbaren Wohnraum"
+
+                document.getElementById("lang_item1").innerText="Startseite"
+
+                document.getElementById("lang_item2").innerText="Bezahlbare Wohnungen"
             }
         });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            document.getElementById("list_adv1").innerHTML = returnAdvWord()
+
+
+        })
     </script>
 
 </body>

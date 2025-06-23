@@ -4,5 +4,5 @@ function getLangFromPath() {
 }
 
 function returnAdvWord(){
-    return `<p style="text-align: center">Advertisment</p>`
+    return `<p style="text-align: center;text-align: center; line-height: 100px; margin: 0;width: 100%">Advertisment</p>`
 }

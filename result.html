@@ -132,6 +132,9 @@
     <header data-eusoft-scrollable-element="1" id = "header">
     </header>
 
+    <div class="adswp" style="height: auto !important;" data-eusoft-scrollable-element="1" id="result_adv1">
+        Advertise
+    </div>
 
     <div class="success-wrap">
         <div class="success-content">
@@ -168,6 +171,10 @@
                 <i class="fab fa-facebook-messenger"></i>
             </a>
         </div>
+    </div>
+
+    <div class="adswp" style="height: auto !important;" data-eusoft-scrollable-element="1" id="result_adv2">
+        Advertise
     </div>
 
     <div style="max-width: 600px; margin: 30px auto; padding: 30px; background: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
@@ -420,6 +427,13 @@
                 document.getElementById("lang_succeed").innerText="Erfolgreich eingereicht"
                 document.getElementById("lang_back").innerText="Zurück zur Startseite"
             }
+        })
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            document.getElementById("result_adv1").innerHTML = returnAdvWord()
+            document.getElementById("result_adv2").innerHTML = returnAdvWord()
         })
     </script>
 </body>

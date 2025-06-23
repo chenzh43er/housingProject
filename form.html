@@ -231,6 +231,11 @@
         </symbol>
     </defs>
 </svg>
+
+<div class="adswp" style="height: auto !important;" data-eusoft-scrollable-element="1" id="form_adv1">
+    Advertise
+</div>
+
 <div class="contact-form"
      style="max-width: 600px; margin: 30px auto; padding: 30px; background: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
     <form>
@@ -257,6 +262,10 @@
             Kontaktanfrage senden
         </button>
     </form>
+</div>
+
+<div class="adswp" style="height: auto !important;" data-eusoft-scrollable-element="1" id="form_adv2">
+    Advertise
 </div>
 
 <div style="max-width: 600px; margin: 30px auto; padding: 30px; background: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
@@ -599,13 +608,26 @@
         let display_city = urlParams.get('city');
         let display_district = urlParams.get('district');
 
-
-        const title = $('input[name="title"]:checked').val();
         const name = $('#name').val();
         const email = $('#email').val();
-        const phone = $('#phone').val();
         const message = $('#message').val();
-        window.location.href = `./result.html?id=${id}&state=${display_state}&city=${display_city}&district=${display_district}`;
+
+
+        const lang = getLangFromPath()
+        let alertMessage = ""
+        if(lang == "de"){
+            alertMessage = "Bitte erst nach vollständiger Angabe absenden."
+        }else
+        {
+            alertMessage = "Bitte erst nach vollständiger Angabe absenden."
+        }
+
+
+        if(name.length == 0 || email.length == 0 || message.length == 0){
+            alert(alertMessage)
+        }else{
+            window.location.href = `./result.html?id=${id}&state=${display_state}&city=${display_city}&district=${display_district}`;
+        }
     }
 </script>
 
@@ -672,6 +694,13 @@
             document.getElementById("lang_beizhu").innerText="Ich bin Eigentümer einer Immobilie"
             document.getElementById("lang_submit").innerText="Kontaktanfrage senden"
         }
+    })
+</script>
+
+<script>
+    $(document).ready(function () {
+        document.getElementById("form_adv1").innerHTML = returnAdvWord()
+        document.getElementById("form_adv2").innerHTML = returnAdvWord()
     })
 </script>
 

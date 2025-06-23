@@ -55,6 +55,11 @@
             color: #1174eb
         }
 
+        .divider-wrap{
+            grid-column: 1 / -1; /* 占满整行 */
+            text-align: center;
+        }
+
 
     </style>
 </head>
@@ -86,7 +91,8 @@
             </div>
             <h1 class="title" data-eusoft-scrollable-element="1" id = "title_find">Find Affordable Housing</h1>
         </div>
-        <div class="adswp" style="height: auto !important;" data-eusoft-scrollable-element="1">
+        <div class="adswp" style="height: auto !important;" data-eusoft-scrollable-element="1" id="state_adv1">
+            Advertise
         </div>
 
         <div class="select-text">
@@ -131,15 +137,14 @@
         <ul class="select-state" id = "select-state">
         </ul>
 
-        <p class="how-to">
+        <p class="how-to" id = "lang_how1">
             Affordable Housing is
             available at subsidized rates due to government funding and incentives for low-income people. The
             monthly rental cost is <b>as low as $300</b>, which is much lower than the market rent!
         </p>
-        <p class="how-to">
-            Find affordable housing for:<br>1. Seniors<br>2. Disabilities<br>3. Homeless<br>4. Single mom<br>5. Low income families<br>6. Other groups<br><br>Our affordable housing includes:<br>1. HUD apartments<br>2. Public housing<br>3. Section 8 apartments<br>4. Low income tax credit apartments<br>5. Other type of affordable housing        <div></div></p>
-
-
+        <p class="how-to" id = "lang_how2">
+            Find affordable housing for:<br>1. Seniors<br>2. Disabilities<br>3. Homeless<br>4. Single mom<br>5. Low income families<br>6. Other groups<br><br>Our affordable housing includes:<br>1. HUD apartments<br>2. Public housing<br>3. Section 8 apartments<br>4. Low income tax credit apartments<br>5. Other type of affordable housing        <div></div>
+        </p>
     </div>
 
     <div class="detail-rightside" id = "asidePage">
@@ -151,6 +156,7 @@
 </footer>
 
 <script src="./Public/Js/jquery-3.0.0.min.js"></script>
+
 <script>
     document.getElementById("year").textContent = new Date().getFullYear();
     var loginStatus = false
@@ -365,12 +371,16 @@
 
     $(document).ready(function() {
         let innerStr = '';
-        data.forEach(item => {
+        data.forEach((item,index) => {
             innerStr += `<li>
                 <a href="./city.html?state=${item.display_state}"><div class = "selectLidiv">
                     ${item.display_state}
                 </div></a>
                 </li>`;
+
+            if((index+1) % 8 == 0){
+                innerStr += `<li class = "divider-wrap"><div>${returnAdvWord()}</div></li>`
+            }
         });
 
         document.getElementById('select-state').innerHTML = innerStr;
@@ -391,6 +401,25 @@
             document.getElementById("lang_city").innerText="Stadt auswählen"
             document.getElementById("lang_district").innerText="Bezirk auswählen"
             document.getElementById("lang_apartment").innerText="Wählen Sie die Wohnung, die Sie lieben."
+
+            document.getElementById("lang_how1").innerText="Bezahlbarer Wohnraum ist dank staatlicher Fördermittel und Anreize für einkommensschwache Personen zu subventionierten Preisen verfügbar. Die monatliche Miete beginnt bereits bei 300 €, was deutlich unter dem üblichen Marktpreis liegt!"
+            document.getElementById("lang_how2").innerHTML=`<p class="how-to" id="lang_how2">
+    Finden Sie bezahlbaren Wohnraum für:<br>
+    1. Senioren<br>
+    2. Menschen mit Behinderung<br>
+    3. Obdachlose<br>
+    4. Alleinerziehende Mütter<br>
+    5. Familien mit geringem Einkommen<br>
+    6. Andere Personengruppen<br><br>
+
+    Unser Angebot an bezahlbarem Wohnraum umfasst:<br>
+    1. HUD-Wohnungen<br>
+    2. Sozialwohnungen<br>
+    3. Wohnungen mit Section-8-Förderung<br>
+    4. Wohnungen mit Steuergutschrift für einkommensschwache Haushalte<br>
+    5. Weitere Arten von bezahlbarem Wohnraum
+    <div></div>
+</p>`
         }else
         {
             document.getElementById("title_find").innerText="Bezahlbaren Wohnraum finden"
@@ -400,8 +429,33 @@
             document.getElementById("lang_city").innerText="Stadt auswählen"
             document.getElementById("lang_district").innerText="Bezirk auswählen"
             document.getElementById("lang_apartment").innerText="Wählen Sie die Wohnung, die Sie lieben."
+
+            document.getElementById("lang_how1").innerText="Bezahlbarer Wohnraum ist dank staatlicher Fördermittel und Anreize für einkommensschwache Personen zu subventionierten Preisen verfügbar. Die monatliche Miete beginnt bereits bei 300 €, was deutlich unter dem üblichen Marktpreis liegt!"
+            document.getElementById("lang_how2").innerHTML=`<p class="how-to" id="lang_how2">
+    Finden Sie bezahlbaren Wohnraum für:<br>
+    1. Senioren<br>
+    2. Menschen mit Behinderung<br>
+    3. Obdachlose<br>
+    4. Alleinerziehende Mütter<br>
+    5. Familien mit geringem Einkommen<br>
+    6. Andere Personengruppen<br><br>
+
+    Unser Angebot an bezahlbarem Wohnraum umfasst:<br>
+    1. HUD-Wohnungen<br>
+    2. Sozialwohnungen<br>
+    3. Wohnungen mit Section-8-Förderung<br>
+    4. Wohnungen mit Steuergutschrift für einkommensschwache Haushalte<br>
+    5. Weitere Arten von bezahlbarem Wohnraum
+    <div></div>
+</p>`
         }
     });
+</script>
+
+<script>
+    $(document).ready(function () {
+        document.getElementById("state_adv1").innerHTML = returnAdvWord()
+    })
 </script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
