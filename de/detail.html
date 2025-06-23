@@ -1067,7 +1067,7 @@
             }
 
             $(document).ready(function () {
-                let html = `<li class="statelists-imgli">
+                let html = `<li class="statelists-imgli" id = "right_adv">
                         ${returnAdvWord()}
                 </li>`;
 
@@ -1118,6 +1118,21 @@
 
 
                 document.getElementById("aside_list").innerHTML = html;
+
+                const right_adv = document.getElementById('right_adv')
+                if (right_adv) {
+                    const observer = new IntersectionObserver((entries, obs) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                loadListAdv_Test(entry.target);
+                                obs.unobserve(entry.target);
+                            }
+                        });
+                    }, {
+                        rootMargin: '5px',
+                    });
+                    observer.observe(right_adv);
+                }
             });
         }
 
@@ -1158,7 +1173,44 @@
         $(document).ready(function () {
             document.getElementById("detail_adv1").innerHTML = returnAdvWord()
             document.getElementById("detail_adv2").innerHTML = returnAdvWord()
+
+            const detail_adv1 = document.getElementById('detail_adv1')
+            if (detail_adv1) {
+                const observer = new IntersectionObserver((entries, obs) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            loadListAdv_Test(entry.target);
+                            obs.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    rootMargin: '5px',
+                });
+                observer.observe(detail_adv1);
+            }
+
+            const detail_adv2 = document.getElementById('detail_adv2')
+            if (detail_adv2) {
+                const observer = new IntersectionObserver((entries, obs) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            loadListAdv_Test(entry.target);
+                            obs.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    rootMargin: '5px',
+                });
+                observer.observe(detail_adv2);
+            }
         })
+    </script>
+
+    <script>
+        function loadListAdv_Test(el) {
+            // 插入 <ins> HTML
+            el.innerHTML = returnAdvTestWord();
+        }
     </script>
 </body>
 

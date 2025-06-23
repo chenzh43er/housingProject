@@ -16,7 +16,7 @@
     <style>
         .select-state {
             display: grid;
-            grid-gap: 10px;
+            grid-gap: 20px;
         }
 
         .select-state li {
@@ -523,36 +523,28 @@
             <div class="select-box select-now">
                 <div class="prog" data-eusoft-scrollable-element="1"></div>
                 <div class="step_box">
-                    <svg class="icon_step">
-                        <use xlink:href="#icon-step1"></use>
-                    </svg>
+                    <img src="./Public/Images/dePic.png" alt="deLogo" style="width: 50px;height: 64px;"/>
                     <div class="h4" id = "state_label">Alaska</div>
                 </div>
             </div>
             <div class="select-box select-now">
                 <div class="prog" data-eusoft-scrollable-element="1"></div>
                 <div class="step_box">
-                    <svg class="icon_step">
-                        <use xlink:href="#icon-step2"></use>
-                    </svg>
+                    <img src="./Public/Images/statePic.png" alt="deLogo" style="width: 50px;height: 64px;"/>
                     <div class="h4" id = "lang_city">Choose your city.</div>
                 </div>
             </div>
             <div class="select-box select-after">
                 <div class="prog" data-eusoft-scrollable-element="1"></div>
                 <div class="step_box">
-                    <svg class="icon_step">
-                        <use xlink:href="#icon-step3"></use>
-                    </svg>
+                    <img src="./Public/Images/cityPic.png" alt="deLogo" style="width: 64px;height: 64px;"/>
                     <div class="h4" id = "lang_district">Choose your district.</div>
                 </div>
             </div>
             <div class="select-box select-after">
                 <div class="prog"></div>
                 <div class="step_box">
-                    <svg class="icon_step">
-                        <use xlink:href="#icon-step1"></use>
-                    </svg>
+                    <img src="./Public/Images/districtPic.png" alt="deLogo" style="width: 64px;height: 64px;"/>
                     <div class="h4" id = "lang_apartment">Choose the apartment you love.</div>
                 </div>
             </div>
@@ -860,12 +852,22 @@ ${item.display_city}</div>
 </a>
 </li>`;
             if((index+1) % 8 == 0){
-                innerStr += `<li class = "divider-wrap"><div>${returnAdvWord()}</div></li>`
+                innerStr += `<li class = "divider-wrap state_advClass"><div>${returnAdvWord()}</div></li>`
             }
         });
 
         document.getElementById('select-state').innerHTML = innerStr;
         document.body.style.display = "block";
+
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    loadListAdv_Test(entry.target);
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { rootMargin: '5px' });
+        document.querySelectorAll('.state_advClass').forEach(el => observer.observe(el));
     });
 
 </script>
@@ -880,7 +882,7 @@ ${item.display_city}</div>
 
             document.getElementById("lang_city").innerText="Stadt auswählen"
             document.getElementById("lang_district").innerText="Bezirk auswählen"
-            document.getElementById("lang_apartment").innerText="Wählen Sie die Wohnung, die Sie lieben."
+            document.getElementById("lang_apartment").innerText="Wohnung auswählen"
 
             document.getElementById("lang_how1").innerText="Bezahlbarer Wohnraum ist dank staatlicher Fördermittel und Anreize für einkommensschwache Personen zu subventionierten Preisen verfügbar. Die monatliche Miete beginnt bereits bei 300 €, was deutlich unter dem üblichen Marktpreis liegt!"
             document.getElementById("lang_how2").innerHTML=`<p class="how-to" id="lang_how2">
@@ -907,7 +909,7 @@ ${item.display_city}</div>
 
             document.getElementById("lang_city").innerText="Stadt auswählen"
             document.getElementById("lang_district").innerText="Bezirk auswählen"
-            document.getElementById("lang_apartment").innerText="Wählen Sie die Wohnung, die Sie lieben."
+            document.getElementById("lang_apartment").innerText="Wohnung auswählen"
 
             document.getElementById("lang_how1").innerText="Bezahlbarer Wohnraum ist dank staatlicher Fördermittel und Anreize für einkommensschwache Personen zu subventionierten Preisen verfügbar. Die monatliche Miete beginnt bereits bei 300 €, was deutlich unter dem üblichen Marktpreis liegt!"
             document.getElementById("lang_how2").innerHTML=`<p class="how-to" id="lang_how2">
@@ -934,7 +936,29 @@ ${item.display_city}</div>
 <script>
     $(document).ready(function () {
         document.getElementById("state_adv1").innerHTML = returnAdvWord()
+
+        const state_adv1 = document.getElementById('state_adv1')
+        if (state_adv1) {
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        loadListAdv_Test(entry.target);
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, {
+                rootMargin: '5px',
+            });
+            observer.observe(state_adv1);
+        }
     })
+</script>
+
+<script>
+    function loadListAdv_Test(el) {
+        // 插入 <ins> HTML
+        el.innerHTML = returnAdvTestWord();
+    }
 </script>
 
 </body>

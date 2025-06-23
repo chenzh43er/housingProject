@@ -608,7 +608,7 @@
 
                 if((index +1 ) % 3 == 0 ){
                     html += `
-                <li class="statelists-imgli">
+                <li class="statelists-imgli state_advClass">
                         ${returnAdvWord()}
                 </li>`
                 }
@@ -639,10 +639,24 @@
                         <meta itemprop="position" content="2">
                     </span>`
 
+            }else{
+                document.getElementById("locate_search").innerHTML=``
             }
 
             $('.statelists').html(html);
             document.body.style.display = "block";
+
+
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        loadListAdv_Test(entry.target);
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { rootMargin: '5px' });
+            document.querySelectorAll('.state_advClass').forEach(el => observer.observe(el));
+
         }
 
         // 初始化分页
@@ -693,7 +707,7 @@
             $(document).ready(function () {
 
                 let html =  `
-                <li class="statelists-imgli">
+                <li class="statelists-imgli" id = "right_adv">
                         ${returnAdvWord()}
                 </li>`
 
@@ -717,6 +731,22 @@
                 });
 
                 document.getElementById("aside_list").innerHTML = html
+
+
+                const right_adv = document.getElementById('right_adv')
+                if (right_adv) {
+                    const observer = new IntersectionObserver((entries, obs) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                loadListAdv_Test(entry.target);
+                                obs.unobserve(entry.target);
+                            }
+                        });
+                    }, {
+                        rootMargin: '5px',
+                    });
+                    observer.observe(right_adv);
+                }
             });
         }
 
@@ -755,8 +785,28 @@
         $(document).ready(function () {
             document.getElementById("list_adv1").innerHTML = returnAdvWord()
 
-
+            const list_adv1 = document.getElementById('list_adv1')
+            if (list_adv1) {
+                const observer = new IntersectionObserver((entries, obs) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            loadListAdv_Test(entry.target);
+                            obs.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    rootMargin: '5px',
+                });
+                observer.observe(list_adv1);
+            }
         })
+    </script>
+
+    <script>
+        function loadListAdv_Test(el) {
+            // 插入 <ins> HTML
+            el.innerHTML = returnAdvTestWord();
+        }
     </script>
 
 </body>

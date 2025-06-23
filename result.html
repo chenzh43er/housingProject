@@ -434,7 +434,45 @@
         $(document).ready(function () {
             document.getElementById("result_adv1").innerHTML = returnAdvWord()
             document.getElementById("result_adv2").innerHTML = returnAdvWord()
+
+            const result_adv1 = document.getElementById('result_adv1')
+            if (result_adv1) {
+                const observer = new IntersectionObserver((entries, obs) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            loadListAdv_Test(entry.target);
+                            obs.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    rootMargin: '5px',
+                });
+                observer.observe(result_adv1);
+            }
+
+            const result_adv2 = document.getElementById('result_adv2')
+            if (result_adv2) {
+                const observer = new IntersectionObserver((entries, obs) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            loadListAdv_Test(entry.target);
+                            obs.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    rootMargin: '5px',
+                });
+                observer.observe(result_adv2);
+            }
         })
     </script>
+
+    <script>
+        function loadListAdv_Test(el) {
+            // 插入 <ins> HTML
+            el.innerHTML = returnAdvTestWord();
+        }
+    </script>
+
 </body>
 </html>

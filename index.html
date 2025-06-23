@@ -205,6 +205,11 @@
         </div>
     </div>
 </div>
+
+<div class="adswp" style="height: auto !important;" data-eusoft-scrollable-element="1" id="index_adv1">
+    Advertise
+</div>
+
 <div class="wrapper breakBox" data-eusoft-scrollable-element="1">
     <div class="tit-group">
         <h2 class="common-tit" data-eusoft-scrollable-element="1" id = "lang_topsearch">
@@ -657,6 +662,34 @@
             document.getElementById("href_ad6").href="./city.html?state=Hamburg"
         }
     });
+</script>
+
+<script>
+    $(document).ready(function () {
+        document.getElementById("index_adv1").innerHTML = returnAdvWord()
+
+        const index_adv1 = document.getElementById('index_adv1')
+        if (index_adv1) {
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        loadListAdv_Test(entry.target);
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, {
+                rootMargin: '5px',
+            });
+            observer.observe(index_adv1);
+        }
+    })
+</script>
+
+<script>
+    function loadListAdv_Test(el) {
+        // 插入 <ins> HTML
+        el.innerHTML = returnAdvTestWord();
+    }
 </script>
 
 </body>
