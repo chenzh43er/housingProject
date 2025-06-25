@@ -343,7 +343,7 @@
 
             Array.prototype.forEach.call(eles, function (item, index) {
                 var rect;
-                console.log(window.getComputedStyle(item, null).display)
+                //console.log(window.getComputedStyle(item, null).display)
 
                 if (item.dataset.src === '' || window.getComputedStyle(item, null).display == 'none') {
                     return;
@@ -355,7 +355,7 @@
 
                         if (document.body.clientWidth <= 425) {
                             if (isSupportWebp == true && item.dataset.webpsmallsrc) {
-                                console.log(item.dataset.webpsmallsrc);
+                                //console.log(item.dataset.webpsmallsrc);
                                 img.src = item.dataset.webpsmallsrc;
                             } else if (isSupportWebp == true && !item.dataset.webpsmallsrc) {
                                 img.src = item.dataset.webpsrc;
@@ -426,7 +426,7 @@
             $(".filter").click(function () {
                 // console.log(getCookie('order'))
                 var url = window.location.protocol + "//" + window.location.host + "" + window.location.pathname;
-                console.log(url)
+                //console.log(url)
                 if (getCookie('order') == "up") {
                     window.location.href = url + "?sort=down"
                 } else {
@@ -470,7 +470,7 @@
                     var href = $(this).parents(".imgli-box").siblings("a").attr("href");
                     refresh(txt, href);
                     updateClassAndTableName();
-                    console.log("update for click like")
+                    //console.log("update for click like")
                 } else {
                     $("#login").css('display', 'block')
                 }
@@ -504,11 +504,11 @@
                 if (index !== -1) {
                     // Item already exists, remove it
                     existingItems.splice(index, 1);
-                    console.log("Item already exists, remove it", existingItems)
+                    //console.log("Item already exists, remove it", existingItems)
                 } else {
                     // Item does not exist, add it
                     existingItems.push({ txt: txt, href: href });
-                    console.log("Item does not exist, add it", existingItems)
+                   // console.log("Item does not exist, add it", existingItems)
                 }
                 localStorage.setItem("clinicMark", JSON.stringify(existingItems));
 
@@ -527,7 +527,7 @@
                 document.getElementById('header').innerHTML = data;
 
                 const lang = getLangFromPath()
-                console.log(lang)
+                //console.log(lang)
                 if(lang == "de"){
                     document.getElementById("lang_index").innerText="Startseite"
                 }else
@@ -616,7 +616,7 @@
             });
 
             if(display_district && display_city && display_state){
-                console.log("ALL")
+                //console.log("ALL")
 
                 document.getElementById("locate_search").innerHTML=`<span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
                         <a href="./state.html" itemprop="item" class="cur-bread-crumbs" style="color: color: #1174eb;">
@@ -758,7 +758,7 @@
     <script>
         $(document).ready(function () {
             const lang = getLangFromPath()
-            console.log(lang)
+            //console.log(lang)
             if(lang == "de"){
                 document.getElementById("title_find").innerText="Bezahlbaren Wohnraum finden"
                 document.getElementById("total_text").innerText="Wohnungen in der Nähe"

@@ -558,7 +558,7 @@
                     str += '<td><img src=\"/Public/Images/delet.png\" class=\"delet\" alt=\"delet\"></td>';
                     str += '</tr>';
                     $(".favourites_added tbody").append(str);
-                    console.log("footer: add to the table")
+                    //console.log("footer: add to the table")
                 });
             }
         }
@@ -612,7 +612,7 @@
                     }
                     if (txt2 === txt && href2 === href) {
                         $(this).removeClass('remove');
-                        console.log("footer: remove class .remove")
+                        //console.log("footer: remove class .remove")
                     }
                 })
                 updateTable();
@@ -629,7 +629,7 @@
                 $(".total").text(items.length);
 
                 var arrItems = arr.length;
-                console.log(arrItems)
+                //console.log(arrItems)
                 if (numItems > 1) {
                     $(".option").text('options');
                 } else {
@@ -646,7 +646,7 @@
                     var arrin = arr[i];
                     $(".statetitle").each(function (i, item) {
                         if ($(this).text() == arrin) {
-                            console.log($(this).text())
+                            //console.log($(this).text())
                             $(this).siblings(".most-bottom").find(".like").addClass("remove")
                             $(this).siblings(".imgli-box").find(".like").addClass("remove")
                             $(this).siblings(".more").find(".like").addClass("remove")
@@ -685,7 +685,7 @@
 
             Array.prototype.forEach.call(eles, function (item, index) {
                 var rect;
-                console.log(window.getComputedStyle(item, null).display)
+                //console.log(window.getComputedStyle(item, null).display)
 
                 if (item.dataset.src === '' || window.getComputedStyle(item, null).display == 'none') {
                     return;
@@ -697,7 +697,7 @@
 
                         if (document.body.clientWidth <= 425) {
                             if (isSupportWebp == true && item.dataset.webpsmallsrc) {
-                                console.log(item.dataset.webpsmallsrc);
+                                //console.log(item.dataset.webpsmallsrc);
                                 img.src = item.dataset.webpsmallsrc;
                             } else if (isSupportWebp == true && !item.dataset.webpsmallsrc) {
                                 img.src = item.dataset.webpsrc;
@@ -785,7 +785,7 @@
                     var href = window.location.pathname;
                     refresh(txt, href);
                     updateClassAndTableName();
-                    console.log("update for click like")
+                    //console.log("update for click like")
                 } else {
                     $("#login").css('display', 'block')
                 }
@@ -807,11 +807,11 @@
                         if (exists) {
                             var element = $(this).parents(".detail-left").find(".like")
                             element.addClass("remove");
-                            console.log("add remove class", element)
+                            //console.log("add remove class", element)
                         }
                     });
                 }
-                console.log("update class and table name")
+                //console.log("update class and table name")
             }
             function refresh(txt, href) {
                 var existingItems = localStorage.getItem("clinicMark")
@@ -822,11 +822,11 @@
                 if (index !== -1) {
                     // Item already exists, remove it
                     existingItems.splice(index, 1);
-                    console.log("Item already exists, remove it", existingItems)
+                    //console.log("Item already exists, remove it", existingItems)
                 } else {
                     // Item does not exist, add it
                     existingItems.push({ txt: txt, href: href });
-                    console.log("Item does not exist, add it", existingItems)
+                    //console.log("Item does not exist, add it", existingItems)
                 }
                 localStorage.setItem("clinicMark", JSON.stringify(existingItems));
 
@@ -842,7 +842,7 @@
                 document.getElementById('header').innerHTML = data;
 
                 const lang = getLangFromPath()
-                console.log(lang)
+                //console.log(lang)
                 if(lang == "de"){
                     document.getElementById("lang_index").innerText="Startseite"
                 }else
@@ -1090,7 +1090,7 @@
                 });
 
                 if(display_district && display_city && display_state){
-                    console.log("ALL")
+                    //console.log("ALL")
 
                     document.getElementById("locate_search").innerHTML=`<span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
                         <a href="./state.html" itemprop="item" class="cur-bread-crumbs" >
@@ -1155,7 +1155,7 @@
     <script>
         $(document).ready(function () {
             const lang = getLangFromPath()
-            console.log(lang)
+            //console.log(lang)
             if(lang == "de"){
                 document.getElementById("aside_text").innerText="Beratungsdienst für bezahlbaren Wohnraum"
                 document.getElementById("lang_back").innerText="Zurück zur Liste"

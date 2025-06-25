@@ -227,7 +227,7 @@
                     var href = window.location.pathname;
                     refresh(txt, href);
                     updateClassAndTableName();
-                    console.log("update for click like")
+                    //console.log("update for click like")
                 } else {
                     $("#login").css('display', 'block')
                 }
@@ -249,11 +249,11 @@
                         if (exists) {
                             var element = $(this).parents(".detail-left").find(".like")
                             element.addClass("remove");
-                            console.log("add remove class", element)
+                            //console.log("add remove class", element)
                         }
                     });
                 }
-                console.log("update class and table name")
+                //console.log("update class and table name")
             }
             function refresh(txt, href) {
                 var existingItems = localStorage.getItem("clinicMark")
@@ -264,11 +264,11 @@
                 if (index !== -1) {
                     // Item already exists, remove it
                     existingItems.splice(index, 1);
-                    console.log("Item already exists, remove it", existingItems)
+                    //console.log("Item already exists, remove it", existingItems)
                 } else {
                     // Item does not exist, add it
                     existingItems.push({ txt: txt, href: href });
-                    console.log("Item does not exist, add it", existingItems)
+                    //console.log("Item does not exist, add it", existingItems)
                 }
                 localStorage.setItem("clinicMark", JSON.stringify(existingItems));
 
@@ -297,7 +297,7 @@
                 document.getElementById('header').innerHTML = data;
 
                 const lang = getLangFromPath()
-                console.log(lang)
+                //console.log(lang)
                 if(lang == "de"){
                     document.getElementById("lang_index").innerText="Startseite"
                 }else
@@ -418,7 +418,7 @@
     <script>
         $(document).ready(function () {
             const lang = getLangFromPath()
-            console.log(lang)
+            //console.log(lang)
             if(lang == "de"){
                 document.getElementById("lang_succeed").innerText="Erfolgreich eingereicht"
                 document.getElementById("lang_back").innerText="Zurück zur Startseite"

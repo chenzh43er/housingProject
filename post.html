@@ -98,7 +98,7 @@
         str += '<td><img src=\"/Public/Images/delet.png\" class=\"delet\" alt=\"delet\"></td>';
         str += '</tr>';
         $(".favourites_added tbody").append(str);
-        console.log("footer: add to the table")
+        //console.log("footer: add to the table")
       });
     }
   }
@@ -109,7 +109,7 @@
       $(".total").text(items.length);
 
     }
-    console.log("update table name")
+    //console.log("update table name")
   }
 
   $(".shortListButton").click(function (event) {
@@ -160,7 +160,7 @@
         }
         if (txt2 === txt && href2 === href) {
           $(this).removeClass('remove');
-          console.log("footer: remove class .remove")
+          //console.log("footer: remove class .remove")
         }
       })
       updateTable();
@@ -177,7 +177,7 @@
       $(".total").text(items.length);
 
       var arrItems = arr.length;
-      console.log(arrItems)
+      //console.log(arrItems)
       if (numItems > 1) {
         $(".option").text('options');
       } else {
@@ -194,7 +194,7 @@
         var arrin = arr[i];
         $(".statetitle").each(function (i, item) {
           if ($(this).text() == arrin) {
-            console.log($(this).text())
+            //console.log($(this).text())
             $(this).siblings(".most-bottom").find(".like").addClass("remove")
             $(this).siblings(".imgli-box").find(".like").addClass("remove")
             $(this).siblings(".more").find(".like").addClass("remove")

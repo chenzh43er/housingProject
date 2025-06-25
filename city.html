@@ -619,7 +619,7 @@
                 str += '<td><img src=\"/Public/Images/delet.png\" class=\"delet\" alt=\"delet\"></td>';
                 str += '</tr>';
                 $(".favourites_added tbody").append(str);
-                console.log("footer: add to the table")
+                //console.log("footer: add to the table")
             });
         }
     }
@@ -672,7 +672,7 @@
                 }
                 if (txt2 === txt && href2 === href) {
                     $(this).removeClass('remove');
-                    console.log("footer: remove class .remove")
+                    //console.log("footer: remove class .remove")
                 }
             })
             updateTable();
@@ -689,7 +689,7 @@
             $(".total").text(items.length);
 
             var arrItems = arr.length;
-            console.log(arrItems)
+            //console.log(arrItems)
             if (numItems > 1) {
                 $(".option").text('options');
             } else {
@@ -706,7 +706,7 @@
                 var arrin = arr[i];
                 $(".statetitle").each(function (i, item) {
                     if ($(this).text() == arrin) {
-                        console.log($(this).text())
+                        //console.log($(this).text())
                         $(this).siblings(".most-bottom").find(".like").addClass("remove")
                         $(this).siblings(".imgli-box").find(".like").addClass("remove")
                         $(this).siblings(".more").find(".like").addClass("remove")
@@ -745,7 +745,7 @@
 
         Array.prototype.forEach.call(eles, function (item, index) {
             var rect;
-            console.log(window.getComputedStyle(item, null).display)
+            //console.log(window.getComputedStyle(item, null).display)
 
             if (item.dataset.src === '' || window.getComputedStyle(item, null).display == 'none') {
                 return;
@@ -757,7 +757,7 @@
 
                     if (document.body.clientWidth <= 425) {
                         if (isSupportWebp == true && item.dataset.webpsmallsrc) {
-                            console.log(item.dataset.webpsmallsrc);
+                            //console.log(item.dataset.webpsmallsrc);
                             img.src = item.dataset.webpsmallsrc;
                         } else if (isSupportWebp == true && !item.dataset.webpsmallsrc) {
                             img.src = item.dataset.webpsrc;
@@ -800,7 +800,7 @@
             document.getElementById('header').innerHTML = data;
 
             const lang = getLangFromPath()
-            console.log(lang)
+            //console.log(lang)
             if(lang == "de"){
                 document.getElementById("lang_index").innerText="Startseite"
             }else
@@ -821,7 +821,7 @@
         .then(data => {
             document.getElementById('asidePage').innerHTML = data;
             const lang = getLangFromPath()
-            console.log(lang)
+            //console.log(lang)
             if(lang == "de"){
                 document.getElementById("aside_text").innerText="Beratungsdienst für bezahlbaren Wohnraum"
             }else
@@ -875,7 +875,7 @@ ${item.display_city}</div>
 <script>
     $(document).ready(function () {
         const lang = getLangFromPath()
-        console.log(lang)
+        //console.log(lang)
         if(lang == "de"){
             document.getElementById("title_find").innerText="Bezahlbaren Wohnraum finden"
             document.getElementById("aside_text").innerText="Beratungsdienst für bezahlbaren Wohnraum"
