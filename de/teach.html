@@ -5,14 +5,22 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Affordable Housing Near Me - UsLowCostHousing</title>
+    <title>
+        Freerentinghouse.info Teach
+    </title>
     <meta name="description"
           content="UsLowCostHousing offers you the easiest and fastest way to find Affordable Housing near you.">
     <link type="text/css" rel="stylesheet" href="./Public/Css/hs-style.css">
     <link type="text/css" rel="stylesheet" href="./Public/Css/lch-office.css">
     <script src="./Public/Js/utlParam.js"></script>
     <script src="./Public/Js/common.js"></script>
-
+    <link rel="icon" href="./Public/Images/icon.png" type="image/png">
+    <style>
+        .loc-btn{
+            font-weight: bold !important;
+            color: white !important;
+        }
+    </style>
 </head>
 
 <body aria-hidden="false">
@@ -450,30 +458,34 @@
                 <div class="prog" data-eusoft-scrollable-element="1"></div>
                 <div class="step_box">
                     <img src="./Public/Images/dePic.png" alt="deLogo" style="width: 50px;height: 64px;"/>
-                    <div class="h4" id = "lang_state">Choose your state.</div>
+                    <div class="h4" id = "lang_state"></div>
                 </div>
             </div>
             <div class="select-box select-after">
                 <div class="prog" data-eusoft-scrollable-element="1"></div>
                 <div class="step_box">
                     <img src="./Public/Images/statePic.png" alt="deLogo" style="width: 50px;height: 64px;"/>
-                    <div class="h4" id = "lang_city">Choose your city.</div>
+                    <div class="h4" id = "lang_city"></div>
                 </div>
             </div>
             <div class="select-box select-after">
                 <div class="prog" data-eusoft-scrollable-element="1"></div>
                 <div class="step_box">
                     <img src="./Public/Images/cityPic.png" alt="deLogo" style="width: 64px;height: 64px;"/>
-                    <div class="h4" id = "lang_district">Choose your district.</div>
+                    <div class="h4" id = "lang_district"></div>
                 </div>
             </div>
             <div class="select-box select-after">
                 <div class="prog" data-eusoft-scrollable-element="1"></div>
                 <div class="step_box">
                     <img src="./Public/Images/districtPic.png" alt="deLogo" style="width: 64px;height: 64px;"/>
-                    <div class="h4" id = "lang_apartment">Choose the apartment you love.</div>
+                    <div class="h4" id = "lang_apartment"></div>
                 </div>
             </div>
+        </div>
+
+        <div>
+            Click Here
         </div>
 
 
@@ -498,63 +510,8 @@
     </div>
 
 
-    <aside class="detail-right" data-eusoft-scrollable-element="1">
-
-
-
-        <div class="most-read" data-eusoft-scrollable-element="1">
-            <h2 class="common-tit">Affordable Housing Advice</h2>
-            <ul class="most-list">
-                <li>
-                    <div class="most-box">
-                        <a href="#" class="href-item"></a>
-                        <img src="./Public/Images/cover/section-8-pays-for-your-rental-costs.webp"
-                             alt="section-8-pays-for-your-rental-costs" class="most-img">
-                        <h5 class="most-tit">Section 8 Pays For Your Rental Costs</h5>
-                        <div class="most-bottom">
-                            <p class="most-content" data-eusoft-scrollable-element="1">Rental costs are increasing
-                                nationally What should you do if you cannot pay your rent? Section 8 supports
-                                elderly, low-income families, disabled people who cannot pay the rent.</p>
-
-
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="most-box">
-                        <a href="#"
-                           class="href-item"></a>
-                        <img src="./Public/Images/cover/how-can-i-apply-for-section-8-online-and-qualify-for-it.webp"
-                             alt="how-can-i-apply-for-section-8-online-and-qualify-for-it" class="most-img">
-                        <h5 class="most-tit">How Can I Apply For Section 8 Online And Qualify For It</h5>
-                        <div class="most-bottom">
-                            <p class="most-content" data-eusoft-scrollable-element="1">Section 8 programs are
-                                actually called the Housing Choice Voucher Program (HCV) and Project-Based Voucher
-                                Program (PBV). Do you want to know how to apply for Section 8 housing online and how
-                                to qualify for it?</p>
-
-
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="most-box">
-                        <a href="#" class="href-item"></a>
-                        <img src="./Public/Images/cover/hud-assistance-pays-for-your-rental-costs-1.webp"
-                             alt="hud-assistance-pays-for-your-rental-costs-1" class="most-img">
-                        <h5 class="most-tit">HUD Assistance Pays For Your Rental Costs</h5>
-                        <div class="most-bottom">
-                            <p class="most-content" data-eusoft-scrollable-element="1">HUD assistance works by
-                                providing rental subsidies to low-income individuals and families through programs
-                                such as public housing, Section 8 vouchers, and rental assistance.</p>
-
-
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </aside>
+    <div class="detail-rightside" id = "asidePage">
+    </div>
 
 </main>
 
@@ -608,7 +565,7 @@
                 str += '<td><img src=\"/Public/Images/delet.png\" class=\"delet\" alt=\"delet\"></td>';
                 str += '</tr>';
                 $(".favourites_added tbody").append(str);
-                console.log("footer: add to the table")
+                //console.log("footer: add to the table")
             });
         }
     }
@@ -662,7 +619,7 @@
                 }
                 if (txt2 === txt && href2 === href) {
                     $(this).removeClass('remove');
-                    console.log("footer: remove class .remove")
+                    //console.log("footer: remove class .remove")
                 }
             })
             updateTable();
@@ -679,7 +636,7 @@
             $(".total").text(items.length);
 
             var arrItems = arr.length;
-            console.log(arrItems)
+            //console.log(arrItems)
             if (numItems > 1) {
                 $(".option").text('options');
             } else {
@@ -696,7 +653,7 @@
                 var arrin = arr[i];
                 $(".statetitle").each(function (i, item) {
                     if ($(this).text() == arrin) {
-                        console.log($(this).text())
+                        //console.log($(this).text())
                         $(this).siblings(".most-bottom").find(".like").addClass("remove")
                         $(this).siblings(".imgli-box").find(".like").addClass("remove")
                         $(this).siblings(".more").find(".like").addClass("remove")
@@ -735,7 +692,7 @@
 
         Array.prototype.forEach.call(eles, function (item, index) {
             var rect;
-            console.log(window.getComputedStyle(item, null).display)
+            //console.log(window.getComputedStyle(item, null).display)
 
             if (item.dataset.src === '' || window.getComputedStyle(item, null).display == 'none') {
                 return;
@@ -747,7 +704,7 @@
 
                     if (document.body.clientWidth <= 425) {
                         if (isSupportWebp == true && item.dataset.webpsmallsrc) {
-                            console.log(item.dataset.webpsmallsrc);
+                            //console.log(item.dataset.webpsmallsrc);
                             img.src = item.dataset.webpsmallsrc;
                         } else if (isSupportWebp == true && !item.dataset.webpsmallsrc) {
                             img.src = item.dataset.webpsrc;
@@ -789,7 +746,7 @@
             document.getElementById('header').innerHTML = data;
 
             const lang = getLangFromPath()
-            console.log(lang)
+            //console.log(lang)
             if(lang == "de"){
                 document.getElementById("lang_index").innerText="Startseite"
             }else
@@ -804,12 +761,41 @@
         .then(data => {
             document.getElementById('footer').innerHTML = data;
         });
+
+    fetch('./aside.html')
+        .then(res => res.text())
+        .then(data => {
+            document.getElementById('asidePage').innerHTML = data;
+            const lang = getLangFromPath()
+            //console.log(lang)
+            if(lang == "de"){
+                document.getElementById("aside_text").innerText="Beratungsdienst für bezahlbaren Wohnraum"
+            }else
+            {
+                document.getElementById("aside_text").innerText="Beratungsdienst für bezahlbaren Wohnraum"
+            }
+
+            const aside_adv = document.getElementById('aside_adv')
+            if (aside_adv) {
+                const observer = new IntersectionObserver((entries, obs) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            loadListAdv_Test(entry.target);
+                            obs.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    rootMargin: '5px',
+                });
+                observer.observe(aside_adv);
+            }
+        });
 </script>
 
 <script>
     $(document).ready(function () {
         const lang = getLangFromPath()
-        console.log(lang)
+        //console.log(lang)
         if(lang == "de"){
             document.getElementById("lang_state").innerText="Bundesland auswählen"
             document.getElementById("lang_city").innerText="Stadt auswählen"
@@ -840,9 +826,7 @@
 
             document.getElementById("lang_price").innerText="Schon ab 300€/Monat"
 
-            document.getElementById("lang_click").innerHTML=`<svg class="icon-loc" width="18" height="18">
-                        <use xlink:href="#icon-loc"></use>
-                    </svg>Hier klicken</a>`
+            document.getElementById("lang_click").innerHTML=`Hier klicken`
         }else
         {
             document.getElementById("lang_state").innerText="Bundesland auswählen"
@@ -874,9 +858,7 @@
 
             document.getElementById("lang_price").innerText="Schon ab 300€/Monat"
 
-            document.getElementById("lang_click").innerHTML=`<svg class="icon-loc" width="18" height="18">
-                        <use xlink:href="#icon-loc"></use>
-                    </svg>Hier klicken</a>`
+            document.getElementById("lang_click").innerHTML=`Hier klicken`
         }
     });
 </script>
@@ -884,6 +866,7 @@
 <script>
     $(document).ready(function () {
         document.getElementById("teach_adv1").innerHTML = returnAdvWord()
+
 
         const teach_adv1 = document.getElementById('teach_adv1')
         if (teach_adv1) {
@@ -899,6 +882,9 @@
             });
             observer.observe(teach_adv1);
         }
+
+        //titleReturn
+        document.title = `${returnWebStr()} Teach.`;
     })
 </script>
 

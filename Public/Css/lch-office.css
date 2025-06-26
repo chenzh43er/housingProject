@@ -3156,7 +3156,8 @@ th:first-child {
     }
 
     .select-box:nth-child(3) .prog:after {
-        top: 8px
+        height: 100%;
+        bottom: -8px
     }
 
     .select-box:nth-child(4) .prog:after {

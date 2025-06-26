@@ -4,13 +4,14 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Affordable Housing Near Me - UsLowCostHousing</title>
+  <title>Freerentinghouse.info Post</title>
   <meta name="description"
         content="UsLowCostHousing offers you the easiest and fastest way to find Affordable Housing near you.">
   <link type="text/css" rel="stylesheet" href="./Public/Css/hs-style.css">
   <link type="text/css" rel="stylesheet" href="./Public/Css/lch-office.css">
   <script src="./Public/Js/utlParam.js"></script>
   <script src="./Public/Js/common.js"></script>
+  <link rel="icon" href="./Public/Images/icon.png" type="image/png">
   <style>
     .select-state {
       display: grid;
@@ -243,6 +244,29 @@
           .then(res => res.text())
           .then(data => {
             document.getElementById('asidePage').innerHTML = data;
+            const lang = getLangFromPath()
+            //console.log(lang)
+            if(lang == "de"){
+              document.getElementById("aside_text").innerText="Beratungsdienst für bezahlbaren Wohnraum"
+            }else
+            {
+              document.getElementById("aside_text").innerText="Beratungsdienst für bezahlbaren Wohnraum"
+            }
+
+            const aside_adv = document.getElementById('aside_adv')
+            if (aside_adv) {
+              const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                  if (entry.isIntersecting) {
+                    loadListAdv_Test(entry.target);
+                    obs.unobserve(entry.target);
+                  }
+                });
+              }, {
+                rootMargin: '5px',
+              });
+              observer.observe(aside_adv);
+            }
           });
 
   function loadScript(src, callback) {
@@ -252,7 +276,7 @@
     script.async = true;
 
     script.onload = function () {
-      //console.log(`${src} 加载完成`);
+      ////console.log(`${src} 加载完成`);
       if (callback) callback(); // 加载完成后执行回调函数
     };
 
@@ -271,7 +295,7 @@
       const postId = params.get('postid'); // "John"
 
       const result = post[postId]
-      //console.log(result)
+      ////console.log(result)
 
       const titleDiv = `<div class="title_box" data-eusoft-scrollable-element="1">
                 <div class="bread_crumbs" itemscope="" itemtype="http://schema.org/BreadcrumbList">
@@ -292,6 +316,9 @@
             </div>`
 
       document.getElementById("postPage").innerHTML = titleDiv + result
+
+      //titleReturn
+      document.title = `${returnWebStr()} Post.`;
     });
   });
 

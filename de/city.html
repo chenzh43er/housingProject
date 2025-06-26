@@ -6,64 +6,90 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Homeonbudget City</title>
+    <title>Freerentinghouse.info City</title>
     <meta name="description"
           content="UsLowCostHousing provides information on all lists of Affordable Housing in Alaska. Find the best one near you.">
     <link type="text/css" rel="stylesheet" href="./Public/Css/hs-style.css">
     <link type="text/css" rel="stylesheet" href="./Public/Css/lch-office.css">
     <script src="./Public/Js/utlParam.js"></script>
     <script src="./Public/Js/common.js"></script>
+    <link rel="icon" href="./Public/Images/icon.png" type="image/png">
     <style>
         .select-state {
             display: grid;
-            grid-gap: 20px;
+            grid-template-columns: repeat(2, 1fr); /* 默认移动端2列 */
+            gap: 20px;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        @media screen and (min-width: 900px) {
+            .select-state {
+                grid-template-columns: repeat(4, 1fr); /* 桌面4列 */
+            }
         }
 
         .select-state li {
-            margin-bottom: 0px;
+            margin: 0;
         }
 
         .select-state li a {
             display: block;
             padding: 5px 0;
+            text-decoration: none;
+            color: inherit;
         }
 
-        @media screen and (min-width: 900px) {
-            .select-state {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
+        /* 外部容器：实现居中 + 基础样式 */
+        .selectLidiv {
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 5px;
+            min-height: 50px;
 
-        @media screen and (max-width: 900px) {
-            .select-state {
-                grid-template-columns:  repeat(2, 1fr);
-            }
-        }
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-        .selectLidiv{
-            border: 1px solid;border-radius: 10px;border-color: #eee;
-            padding: 5px;min-height: 50px;display: flex; align-items: center;
-            color: #333333;
             background-color: #00000005;
+            color: #333;
+
+            min-width: 0;  /* ✅ 关键，允许在 grid/flex 中压缩 */
+            cursor: pointer;
+            transition: border-color 0.3s, color 0.3s;
         }
 
-        .selectLidiv a{
-            color: #333333
-        }
+        /* 多行省略 + 文本居中 + 自动断词 */
+        .selectLidiv .text-wrapper {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
 
-        .selectLidiv:hover{
-            border: 1px solid;border-radius: 10px;border-color: #1174eb;
-            padding: 5px;min-height: 50px;display: flex; align-items: center;
-            color:#1174eb
-        }
-
-        .selectLidiv:hover a{
-            color: #1174eb
-        }
-
-        .divider-wrap{
-            grid-column: 1 / -1; /* 占满整行 */
             text-align: center;
+            word-break: break-word;
+
+            max-width: 100%;
+            min-width: 0; /* ✅ 防止被撑破 */
+        }
+
+        /* 悬停高亮效果 */
+        .selectLidiv:hover {
+            border-color: #1174eb;
+            color: #1174eb;
+        }
+
+        .selectLidiv:hover a {
+            color: #1174eb;
+        }
+
+        /* 分割线 li，占满整行 */
+        .divider-wrap {
+            grid-column: 1 / -1;
+            text-align: center;
+            pointer-events: none;
+            padding: 10px 0;
         }
 
     </style>
@@ -504,12 +530,6 @@
                             <i itemprop="name">Affordable Housing</i>
                         </a>
                         <meta itemprop="position" content="2">
-                    </span> <span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-                        <span class="bread-crumbs-icon">/</span>
-                        <a href="#" itemprop="item" class="cur-bread-crumbs">
-                            <i itemprop="name">Alaska</i>
-                        </a>
-                        <meta itemprop="position" content="3">
                     </span>
 
             </div>
@@ -524,28 +544,28 @@
                 <div class="prog" data-eusoft-scrollable-element="1"></div>
                 <div class="step_box">
                     <img src="./Public/Images/dePic.png" alt="deLogo" style="width: 50px;height: 64px;"/>
-                    <div class="h4" id = "state_label">Alaska</div>
+                    <div class="h4" id = "state_label"></div>
                 </div>
             </div>
             <div class="select-box select-now">
                 <div class="prog" data-eusoft-scrollable-element="1"></div>
                 <div class="step_box">
                     <img src="./Public/Images/statePic.png" alt="deLogo" style="width: 50px;height: 64px;"/>
-                    <div class="h4" id = "lang_city">Choose your city.</div>
+                    <div class="h4" id = "lang_city"></div>
                 </div>
             </div>
             <div class="select-box select-after">
                 <div class="prog" data-eusoft-scrollable-element="1"></div>
                 <div class="step_box">
                     <img src="./Public/Images/cityPic.png" alt="deLogo" style="width: 64px;height: 64px;"/>
-                    <div class="h4" id = "lang_district">Choose your district.</div>
+                    <div class="h4" id = "lang_district"></div>
                 </div>
             </div>
             <div class="select-box select-after">
                 <div class="prog"></div>
                 <div class="step_box">
                     <img src="./Public/Images/districtPic.png" alt="deLogo" style="width: 64px;height: 64px;"/>
-                    <div class="h4" id = "lang_apartment">Choose the apartment you love.</div>
+                    <div class="h4" id = "lang_apartment"></div>
                 </div>
             </div>
         </div>
@@ -553,7 +573,7 @@
         <ul class="select-state" id="select-state">
 
         </ul>
-
+        <div id = "ddr_adv"></div>
         <p class="how-to" id = "lang_how1">
             Affordable Housing is
             available at subsidized rates due to government funding and incentives for low-income people. The
@@ -619,7 +639,7 @@
                 str += '<td><img src=\"/Public/Images/delet.png\" class=\"delet\" alt=\"delet\"></td>';
                 str += '</tr>';
                 $(".favourites_added tbody").append(str);
-                console.log("footer: add to the table")
+                //console.log("footer: add to the table")
             });
         }
     }
@@ -672,7 +692,7 @@
                 }
                 if (txt2 === txt && href2 === href) {
                     $(this).removeClass('remove');
-                    console.log("footer: remove class .remove")
+                    //console.log("footer: remove class .remove")
                 }
             })
             updateTable();
@@ -689,7 +709,7 @@
             $(".total").text(items.length);
 
             var arrItems = arr.length;
-            console.log(arrItems)
+            //console.log(arrItems)
             if (numItems > 1) {
                 $(".option").text('options');
             } else {
@@ -706,7 +726,7 @@
                 var arrin = arr[i];
                 $(".statetitle").each(function (i, item) {
                     if ($(this).text() == arrin) {
-                        console.log($(this).text())
+                        //console.log($(this).text())
                         $(this).siblings(".most-bottom").find(".like").addClass("remove")
                         $(this).siblings(".imgli-box").find(".like").addClass("remove")
                         $(this).siblings(".more").find(".like").addClass("remove")
@@ -745,7 +765,7 @@
 
         Array.prototype.forEach.call(eles, function (item, index) {
             var rect;
-            console.log(window.getComputedStyle(item, null).display)
+            //console.log(window.getComputedStyle(item, null).display)
 
             if (item.dataset.src === '' || window.getComputedStyle(item, null).display == 'none') {
                 return;
@@ -757,7 +777,7 @@
 
                     if (document.body.clientWidth <= 425) {
                         if (isSupportWebp == true && item.dataset.webpsmallsrc) {
-                            console.log(item.dataset.webpsmallsrc);
+                            //console.log(item.dataset.webpsmallsrc);
                             img.src = item.dataset.webpsmallsrc;
                         } else if (isSupportWebp == true && !item.dataset.webpsmallsrc) {
                             img.src = item.dataset.webpsrc;
@@ -800,7 +820,7 @@
             document.getElementById('header').innerHTML = data;
 
             const lang = getLangFromPath()
-            console.log(lang)
+            //console.log(lang)
             if(lang == "de"){
                 document.getElementById("lang_index").innerText="Startseite"
             }else
@@ -821,12 +841,27 @@
         .then(data => {
             document.getElementById('asidePage').innerHTML = data;
             const lang = getLangFromPath()
-            console.log(lang)
+            //console.log(lang)
             if(lang == "de"){
                 document.getElementById("aside_text").innerText="Beratungsdienst für bezahlbaren Wohnraum"
             }else
             {
                 document.getElementById("aside_text").innerText="Beratungsdienst für bezahlbaren Wohnraum"
+            }
+
+            const aside_adv = document.getElementById('aside_adv')
+            if (aside_adv) {
+                const observer = new IntersectionObserver((entries, obs) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            loadListAdv_Test(entry.target);
+                            obs.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    rootMargin: '5px',
+                });
+                observer.observe(aside_adv);
             }
         });
 </script>
@@ -848,13 +883,18 @@
             innerStr += `<li>
 <a href="./district.html?state=${display_state}&city=${item.display_city}">
 <div class = "selectLidiv">
-${item.display_city}</div>
+<div class="text-wrapper">
+${item.display_city}</div></div>
 </a>
 </li>`;
-            if((index+1) % 8 == 0){
+            if((index+1) % 12 == 0){
                 innerStr += `<li class = "divider-wrap state_advClass"><div>${returnAdvWord()}</div></li>`
             }
         });
+
+        if(data.length < 12){
+            document.getElementById("ddr_adv").innerHTML = returnAdvWord()
+        }
 
         document.getElementById('select-state').innerHTML = innerStr;
         document.body.style.display = "block";
@@ -868,6 +908,21 @@ ${item.display_city}</div>
             });
         }, { rootMargin: '5px' });
         document.querySelectorAll('.state_advClass').forEach(el => observer.observe(el));
+
+        const ddr_adv = document.getElementById('ddr_adv')
+        if (ddr_adv) {
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        loadListAdv_Test(entry.target);
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, {
+                rootMargin: '5px',
+            });
+            observer.observe(ddr_adv);
+        }
     });
 
 </script>
@@ -875,10 +930,9 @@ ${item.display_city}</div>
 <script>
     $(document).ready(function () {
         const lang = getLangFromPath()
-        console.log(lang)
+        //console.log(lang)
         if(lang == "de"){
             document.getElementById("title_find").innerText="Bezahlbaren Wohnraum finden"
-            document.getElementById("aside_text").innerText="Beratungsdienst für bezahlbaren Wohnraum"
 
             document.getElementById("lang_city").innerText="Stadt auswählen"
             document.getElementById("lang_district").innerText="Bezirk auswählen"
@@ -905,7 +959,6 @@ ${item.display_city}</div>
         }else
         {
             document.getElementById("title_find").innerText="Bezahlbaren Wohnraum finden"
-            document.getElementById("aside_text").innerText="Beratungsdienst für bezahlbaren Wohnraum"
 
             document.getElementById("lang_city").innerText="Stadt auswählen"
             document.getElementById("lang_district").innerText="Bezirk auswählen"
@@ -951,6 +1004,9 @@ ${item.display_city}</div>
             });
             observer.observe(state_adv1);
         }
+
+        //titleReturn
+        document.title = `${returnWebStr()} City.`;
     })
 </script>
 

@@ -4,13 +4,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Homeonbudget Form Submit</title>
+    <title>Freerentinghouse.info Form Submit</title>
     <meta name="description"
           content="Find detailed information on Chugach View, including address, phone number, services, and more.">
     <link type="text/css" rel="stylesheet" href="./Public/Css/hs-style.css">
     <link type="text/css" rel="stylesheet" href="./Public/Css/lch-office.css">
     <script src="./Public/Js/utlParam.js"></script>
     <script src="./Public/Js/common.js"></script>
+    <link rel="icon" href="./Public/Images/icon.png" type="image/png">
     <style>
 
         .suggestHouseUl {
@@ -232,46 +233,59 @@
     </defs>
 </svg>
 
-<div class="adswp" style="height: auto !important;" data-eusoft-scrollable-element="1" id="form_adv1">
-    Advertise
-</div>
-
-<div class="contact-form"
-     style="max-width: 600px; margin: 30px auto; padding: 30px; background: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-    <form>
-        <div class="form-group" style="margin-bottom: 20px;">
-            <label for="name" style="display: block; margin-bottom: 8px; font-weight: bold;" id="lang_name">name：</label>
-            <input type="text" id="name" name="name" required
-                   style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+<main class="wrapper contents" style="height: auto !important; min-height: 0px !important;" data-eusoft-scrollable-element="1">
+    <div class="detail-left" style="height: auto !important;" data-eusoft-scrollable-element="1">
+        <div class="adswp" style="height: auto !important;" data-eusoft-scrollable-element="1" id="form_adv1">
+            Advertise
         </div>
 
-        <div class="form-group" style="margin-bottom: 20px;">
-            <label for="email" style="display: block; margin-bottom: 8px; font-weight: bold;">E-Mail</label>
-            <input type="email" id="email" name="email" required
-                   style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+        <div class="contact-form"
+             style="max-width: 600px; margin: 30px auto; padding: 30px; background: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+            <form>
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label for="name" style="display: block; margin-bottom: 8px; font-weight: bold;" id="lang_name">name：</label>
+                    <input type="text" id="name" name="name" required
+                           style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label for="email" style="display: block; margin-bottom: 8px; font-weight: bold;">E-Mail</label>
+                    <input type="email" id="email" name="email" required
+                           style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label for="message" style="display: block; margin-bottom: 8px; font-weight: bold;" id = "lang_beizhu">Ich bin Eigentümer einer Immobilie</label>
+                    <textarea id="message" name="message" rows="4"
+                              style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+                </div>
+
+                <button type="button" onclick="submitForm()" class="submit-btn"
+                        style="width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;" id = "lang_submit">
+                    Kontaktanfrage senden
+                </button>
+            </form>
         </div>
 
-        <div class="form-group" style="margin-bottom: 20px;">
-            <label for="message" style="display: block; margin-bottom: 8px; font-weight: bold;" id = "lang_beizhu">Ich bin Eigentümer einer Immobilie</label>
-            <textarea id="message" name="message" rows="4"
-                      style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+        <div class="adswp" style="height: auto !important;" data-eusoft-scrollable-element="1" id="form_adv2">
+            Advertise
         </div>
 
-        <button type="button" onclick="submitForm()" class="submit-btn"
-                style="width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;" id = "lang_submit">
-            Kontaktanfrage senden
-        </button>
-    </form>
-</div>
+        <div style="max-width: 600px; margin: 30px auto; padding: 30px; background: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+            <ul class="suggestHouseUl" id = "under_list">
+            </ul>
+        </div>
+    </div>
 
-<div class="adswp" style="height: auto !important;" data-eusoft-scrollable-element="1" id="form_adv2">
-    Advertise
-</div>
-
-<div style="max-width: 600px; margin: 30px auto; padding: 30px; background: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-    <ul class="suggestHouseUl" id = "aside_list">
-    </ul>
-</div>
+    <div class="detail-rightside" id = "asidePage">
+        <aside class="detail-right" data-eusoft-scrollable-element="1" id = "aside_right">
+            <div class="most-read" data-eusoft-scrollable-element="1">
+                <h2 class="common-tit" id = "aside_text">Affordable Housing Advice</h2>
+                <ul class="most-list" id = "aside_list">
+                </ul>
+        </aside>
+    </div>
+</main>
 
 <footer id = "footer">
 </footer>
@@ -318,7 +332,7 @@
                 str += '<td><img src=\"/Public/Images/delet.png\" class=\"delet\" alt=\"delet\"></td>';
                 str += '</tr>';
                 $(".favourites_added tbody").append(str);
-                console.log("footer: add to the table")
+                //console.log("footer: add to the table")
             });
         }
     }
@@ -372,7 +386,7 @@
                 }
                 if (txt2 === txt && href2 === href) {
                     $(this).removeClass('remove');
-                    console.log("footer: remove class .remove")
+                    //console.log("footer: remove class .remove")
                 }
             })
             updateTable();
@@ -389,7 +403,7 @@
             $(".total").text(items.length);
 
             var arrItems = arr.length;
-            console.log(arrItems)
+            //console.log(arrItems)
             if (numItems > 1) {
                 $(".option").text('options');
             } else {
@@ -406,7 +420,7 @@
                 var arrin = arr[i];
                 $(".statetitle").each(function (i, item) {
                     if ($(this).text() == arrin) {
-                        console.log($(this).text())
+                        //console.log($(this).text())
                         $(this).siblings(".most-bottom").find(".like").addClass("remove")
                         $(this).siblings(".imgli-box").find(".like").addClass("remove")
                         $(this).siblings(".more").find(".like").addClass("remove")
@@ -445,7 +459,7 @@
 
         Array.prototype.forEach.call(eles, function (item, index) {
             var rect;
-            console.log(window.getComputedStyle(item, null).display)
+            //console.log(window.getComputedStyle(item, null).display)
 
             if (item.dataset.src === '' || window.getComputedStyle(item, null).display == 'none') {
                 return;
@@ -457,7 +471,7 @@
 
                     if (document.body.clientWidth <= 425) {
                         if (isSupportWebp == true && item.dataset.webpsmallsrc) {
-                            console.log(item.dataset.webpsmallsrc);
+                            //console.log(item.dataset.webpsmallsrc);
                             img.src = item.dataset.webpsmallsrc;
                         } else if (isSupportWebp == true && !item.dataset.webpsmallsrc) {
                             img.src = item.dataset.webpsrc;
@@ -527,7 +541,7 @@
                 var href = window.location.pathname;
                 refresh(txt, href);
                 updateClassAndTableName();
-                console.log("update for click like")
+                //console.log("update for click like")
             } else {
                 $("#login").css('display', 'block')
             }
@@ -549,27 +563,27 @@
                     if (exists) {
                         var element = $(this).parents(".detail-left").find(".like")
                         element.addClass("remove");
-                        console.log("add remove class", element)
+                        //console.log("add remove class", element)
                     }
                 });
             }
-            console.log("update class and table name")
+            //console.log("update class and table name")
         }
 
         function refresh(txt, href) {
             var existingItems = localStorage.getItem("clinicMark")
                 ? JSON.parse(localStorage.getItem("clinicMark"))
                 : [];
-            // console.log(existingItems);
+            // //console.log(existingItems);
             var index = existingItems.findIndex(item => item.txt === txt && item.href === href)
             if (index !== -1) {
                 // Item already exists, remove it
                 existingItems.splice(index, 1);
-                console.log("Item already exists, remove it", existingItems)
+                //console.log("Item already exists, remove it", existingItems)
             } else {
                 // Item does not exist, add it
                 existingItems.push({txt: txt, href: href});
-                console.log("Item does not exist, add it", existingItems)
+                //console.log("Item does not exist, add it", existingItems)
             }
             localStorage.setItem("clinicMark", JSON.stringify(existingItems));
 
@@ -584,7 +598,7 @@
             document.getElementById('header').innerHTML = data;
 
             const lang = getLangFromPath()
-            console.log(lang)
+            //console.log(lang)
             if(lang == "de"){
                 document.getElementById("lang_index").innerText="Startseite"
             }else
@@ -646,7 +660,7 @@
             display_state = 'Berlin'; // 或你希望的默认值
         }
 
-        const { data, error } = await fetchRandomHousesByState(display_state,6);
+        const { data, error } = await fetchRandomHousesByState(display_state,5);
 
         if (error) {
             console.error("获取房源数据失败：", error.message);
@@ -680,10 +694,61 @@
 
     init();
 </script>
+
+<script type="module">
+    import { fetchRandomHousesByState, fetchDataById } from './Public/Js/dataGet.js';
+
+    async function init() {
+        const urlParams = new URLSearchParams(window.location.search);
+
+        let display_state = urlParams.get('state');
+        let display_city = urlParams.get('city');
+        let display_district = urlParams.get('district');
+
+        // 设定默认值，如果为 undefined 则默认一个州名，例如 'California'
+        if (!display_state) {
+            display_state = 'Berlin'; // 或你希望的默认值
+        }
+
+        const { data, error } = await fetchRandomHousesByState(display_state,6);
+
+        if (error) {
+            console.error("获取房源数据失败：", error.message);
+            return;
+        }
+
+        $(document).ready(function () {
+            let html = ``;
+
+            data.forEach(house => {
+                const serverPic = "https://pub-57bc773ebbc24ef1be9f0d6d9681b286.r2.dev/" + house.mainpic + "/";
+                const picsObj = JSON.parse(house.pics_jsonStr || "[]");
+
+                html += `<li>
+                    <div class="most-box">
+                      <a href="./detail.html?id=${house.id}&state=${house.display_state}&city=${house.display_city}&district=${house.display_district}" class="href-item"></a>
+                      <img src="${serverPic + (picsObj[0] || '')}"
+                           alt="section-8-pays-for-your-rental-costs" class="most-img">
+                      <h5 class="most-tit">${house.name}</h5>
+                      <div class="most-bottom">
+                        <p class="most-content" data-eusoft-scrollable-element="1">${house.location}</p>
+                      </div>
+                      <h5 class="most-tit">${house.price} € Kaltmiete zzgl. NK</h5>
+                    </div>
+                  </li>`;
+            });
+
+            document.getElementById("under_list").innerHTML = html;
+        });
+    }
+
+    init();
+</script>
+
 <script>
     $(document).ready(function () {
         const lang = getLangFromPath()
-        console.log(lang)
+        //console.log(lang)
         if(lang == "de"){
             document.getElementById("lang_name").innerText="Vollständiger Name"
             document.getElementById("lang_beizhu").innerText="Ich bin Eigentümer einer Immobilie"
@@ -732,6 +797,9 @@
             });
             observer.observe(form_adv2);
         }
+
+        //titleReturn
+        document.title = `${returnWebStr()} Form Submit.`;
     })
 </script>
 
