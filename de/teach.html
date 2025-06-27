@@ -20,6 +20,24 @@
             font-weight: bold !important;
             color: white !important;
         }
+
+        .button-div {
+            background-color: #f5b609;  /* 背景色 */
+            color: white;               /* 字体颜色 */
+            padding: 12px 20px;         /* 内边距 */
+            text-align: center;         /* 居中文本 */
+            border-radius: 8px;         /* 圆角 */
+            cursor: pointer;            /* 鼠标指针变为手型 */
+            font-size: 16px;            /* 字体大小 */
+            font-weight: bold;          /* 字体加粗 */
+            user-select: none;          /* 禁止选中文本 */
+            transition: background-color 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .button-div:hover {
+            background-color: #e0a800; /* 悬浮时稍微变深 */
+        }
     </style>
 </head>
 
@@ -434,7 +452,7 @@
             <div class="c-l" data-eusoft-scrollable-element="1" id="lang_locate">Locate current location</div>
             <h1 class="indexitm-banner-tit" data-eusoft-scrollable-element="1" id = "lang_find">Find Affordable Housing</h1>
             <p class="indexitm-banner-desc" id="lang_price">As low as $300/mo</p>
-            <ul class="ab-search-wrap">
+            <ul class="ab-search-wrap" style="display: none">
                 <li><a class="loc-btn" id="lang_click" href="./state.html">
                     <svg class="icon-loc" width="18" height="18">
                         <use xlink:href="#icon-loc"></use>
@@ -484,8 +502,8 @@
             </div>
         </div>
 
-        <div>
-            Click Here
+        <div class="button-div" onclick="handleClick()" id = "lang_clickDiv">
+            点击这里
         </div>
 
 
@@ -827,6 +845,8 @@
             document.getElementById("lang_price").innerText="Schon ab 300€/Monat"
 
             document.getElementById("lang_click").innerHTML=`Hier klicken`
+
+            document.getElementById("lang_clickDiv").innerText = "Hier klicken, um zu starten"
         }else
         {
             document.getElementById("lang_state").innerText="Bundesland auswählen"
@@ -859,6 +879,8 @@
             document.getElementById("lang_price").innerText="Schon ab 300€/Monat"
 
             document.getElementById("lang_click").innerHTML=`Hier klicken`
+
+            document.getElementById("lang_clickDiv").innerText = "Hier klicken, um zu starten"
         }
     });
 </script>
@@ -892,6 +914,13 @@
     function loadListAdv_Test(el) {
         // 插入 <ins> HTML
         el.innerHTML = returnAdvTestWord();
+    }
+</script>
+
+<script>
+    function handleClick() {
+        //alert("按钮被点击！");
+        window.location.href = "./state.html"
     }
 </script>
 
