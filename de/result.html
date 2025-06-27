@@ -125,6 +125,15 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
+
+        .RightBottom_adbox {
+            width: 100%;
+            position: absolute;
+            left: 0;
+            position: sticky;
+            top: 70px;
+            height: 600px !important;
+        }
     </style>
 </head>
 
@@ -132,6 +141,10 @@
 
 <header data-eusoft-scrollable-element="1" id = "header">
 </header>
+
+<main class="wrapper contents" style="height: auto !important; min-height: 0px !important;" data-eusoft-scrollable-element="1">
+
+    <div class="detail-left" style="height: auto !important;" data-eusoft-scrollable-element="1">
 
 <div class="adswp" style="height: auto !important;" data-eusoft-scrollable-element="1" id="result_adv1">
     Advertise
@@ -179,9 +192,28 @@
 </div>
 
 <div style="max-width: 600px; margin: 30px auto; padding: 30px; background: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-    <ul class="suggestHouseUl" id = "aside_list">
+    <ul class="suggestHouseUl" id = "under_list">
     </ul>
 </div>
+
+    </div>
+
+    <div class="detail-rightside" id = "asidePage">
+        <aside class="detail-right" data-eusoft-scrollable-element="1" id = "aside_right">
+            <div class="most-read" data-eusoft-scrollable-element="1" id = "this_mt_right">
+                <h2 class="common-tit" id = "aside_text">Beratungsdienst für bezahlbaren Wohnraum</h2>
+                <ul class="most-list" id = "aside_list">
+                </ul>
+            </div>
+            <div class="test_sticky" id = "adv_sticky">
+                <div class = "RightBottom_adbox" id = "RightBottom_adbox">
+                    ADVERTISMENT
+                </div>
+            </div>
+        </aside>
+    </div>
+
+</main>
 
 <footer id = "footer">
 </footer>
@@ -382,6 +414,78 @@
             display_state = 'Berlin'; // 或你希望的默认值
         }
 
+        const { data, error } = await fetchRandomHousesByState(display_state,3);
+
+        if (error) {
+            console.error("获取房源数据失败：", error.message);
+            return;
+        }
+
+        $(document).ready(function () {
+            let html = ``;
+
+            data.forEach((house,index) => {
+                const serverPic = "https://pub-57bc773ebbc24ef1be9f0d6d9681b286.r2.dev/" + house.mainpic + "/";
+                const picsObj = JSON.parse(house.pics_jsonStr || "[]");
+
+                html += `<li>
+                    <div class="most-box">
+                      <a href="./detail.html?id=${house.id}&state=${house.display_state}&city=${house.display_city}&district=${house.display_district}" class="href-item"></a>
+                      <img src="${serverPic + (picsObj[0] || '')}"
+                           alt="section-8-pays-for-your-rental-costs" class="most-img">
+                      <h5 class="most-tit">${house.name}</h5>
+                      <div class="most-bottom">
+                        <p class="most-content" data-eusoft-scrollable-element="1">${house.location}</p>
+                      </div>
+                      <h5 class="most-tit">${house.price} € Kaltmiete zzgl. NK</h5>
+                    </div>
+                  </li>`;
+
+                if(index == 0){
+                    html+= `
+                <li class="statelists-imgli" id = "right_adv">
+                        ${returnAdvWord()}
+                </li>`
+                }
+            });
+
+            document.getElementById("aside_list").innerHTML = html;
+
+            const right_adv = document.getElementById('right_adv')
+            if (right_adv) {
+                const observer = new IntersectionObserver((entries, obs) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            loadListAdv_Test(entry.target);
+                            obs.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    rootMargin: '5px',
+                });
+                observer.observe(right_adv);
+            }
+        });
+    }
+
+    init();
+</script>
+
+<script type="module">
+    import { fetchRandomHousesByState, fetchDataById } from './Public/Js/dataGet.js';
+
+    async function init() {
+        const urlParams = new URLSearchParams(window.location.search);
+
+        let display_state = urlParams.get('state');
+        let display_city = urlParams.get('city');
+        let display_district = urlParams.get('district');
+
+        // 设定默认值，如果为 undefined 则默认一个州名，例如 'California'
+        if (!display_state) {
+            display_state = 'Berlin'; // 或你希望的默认值
+        }
+
         const { data, error } = await fetchRandomHousesByState(display_state,6);
 
         if (error) {
@@ -410,7 +514,7 @@
                   </li>`;
             });
 
-            document.getElementById("aside_list").innerHTML = html;
+            document.getElementById("under_list").innerHTML = html;
         });
     }
 
@@ -428,7 +532,35 @@
             document.getElementById("lang_succeed").innerText="Erfolgreich eingereicht"
             document.getElementById("lang_back").innerText="Zurück zur Startseite"
         }
+
+        if(isMobile()){
+            document.getElementById("adv_sticky").innerHTML = ''
+            document.getElementById('adv_sticky').style.height = '0px'
+        }else{
+            // 监听滚动条的scroll事件，滚动时触发
+            window.addEventListener('scroll', updatePageHeight);
+            // 初始获取页面高度
+            updatePageHeight();
+        }
     })
+
+    function updatePageHeight() {
+        if (window.innerWidth > 500) {
+            const div = document.getElementById('this_mt_right');
+            const divheight = div.offsetHeight;
+            let totalHeight = 0;
+            const qtq = document.querySelector('.detail-left')
+            try {
+                totalHeight = qtq.offsetHeight
+            } catch (ex) {
+                totalHeight = 0
+            }
+
+            const pageHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+            document.getElementById('adv_sticky').style.height = (totalHeight - divheight) + 'px';
+            //console.log('sticky高度:', document.getElementById('adv_sticky').offsetHeight);
+        }
+    }
 </script>
 
 <script>
