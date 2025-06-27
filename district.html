@@ -556,7 +556,7 @@
 
         </ul>
 
-        <div></div>
+        <div id = "ddr_adv"></div>
 
         <p class="how-to" id = "lang_how1">
 
@@ -890,6 +890,25 @@
             });
         }, { rootMargin: '5px' });
         document.querySelectorAll('.state_advClass').forEach(el => observer.observe(el));
+
+        if(data.length < 12){
+            document.getElementById("ddr_adv").innerHTML = returnAdvWord()
+        }
+
+        const ddr_adv = document.getElementById('ddr_adv')
+        if (ddr_adv) {
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        loadListAdv_Test(entry.target);
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, {
+                rootMargin: '5px',
+            });
+            observer.observe(ddr_adv);
+        }
     });
 </script>
 
