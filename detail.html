@@ -142,6 +142,15 @@
             grid-template-columns: repeat(2, 1fr);
         }
     }
+
+    .RightBottom_adbox {
+        width: 100%;
+        position: absolute;
+        left: 0;
+        position: sticky;
+        top: 70px;
+        height: 600px !important;
+    }
 </style>
 
 <body style="display: none">
@@ -493,16 +502,20 @@
             <ul class="suggestHouseUl" id = "down_list">
             </ul>
         </div>
-
-
     </div>
 
     <div class="detail-rightside" id = "asidePage">
         <aside class="detail-right" data-eusoft-scrollable-element="1" id = "aside_right">
-            <div class="most-read" data-eusoft-scrollable-element="1">
-                <h2 class="common-tit" id = "aside_text">Affordable Housing Advice</h2>
+            <div class="most-read" data-eusoft-scrollable-element="1" id = "this_mt_right">
+                <h2 class="common-tit" id = "aside_text">Beratungsdienst für bezahlbaren Wohnraum</h2>
                 <ul class="most-list" id = "aside_list">
                 </ul>
+            </div>
+            <div class="test_sticky" id = "adv_sticky">
+                <div class = "RightBottom_adbox" id = "RightBottom_adbox">
+                    ADVERTISMENT
+                </div>
+            </div>
         </aside>
     </div>
 </main>
@@ -1082,7 +1095,7 @@
             display_state = 'Berlin'; // 或你希望的默认值
         }
 
-        const { data, error } = await fetchRandomHousesByState(display_state);
+        const { data, error } = await fetchRandomHousesByState(display_state,3);
 
         if (error) {
             console.error("获取房源数据失败：", error.message);
@@ -1090,11 +1103,9 @@
         }
 
         $(document).ready(function () {
-            let html = `<li class="statelists-imgli" id = "right_adv">
-                        ${returnAdvWord()}
-                </li>`;
+            let html = ``;
 
-            data.forEach(house => {
+            data.forEach((house,index) => {
                 const serverPic = "https://pub-57bc773ebbc24ef1be9f0d6d9681b286.r2.dev/" + house.mainpic + "/";
                 const picsObj = JSON.parse(house.pics_jsonStr || "[]");
 
@@ -1110,6 +1121,13 @@
                       <h5 class="most-tit">${house.price} € Kaltmiete zzgl. NK</h5>
                     </div>
                   </li>`;
+
+                if(index == 0){
+                    html+= `
+                <li class="statelists-imgli" id = "right_adv">
+                        ${returnAdvWord()}
+                </li>`
+                }
             });
 
             if(display_district && display_city && display_state){
@@ -1238,7 +1256,35 @@
             document.getElementById("lang_back").innerText="Zurück zur Liste"
             document.getElementById("lang_submit").innerText="Kontakt"
         }
+
+        if(isMobile()){
+            document.getElementById("adv_sticky").innerHTML = ''
+            document.getElementById('adv_sticky').style.height = '0px'
+        }else{
+            // 监听滚动条的scroll事件，滚动时触发
+            window.addEventListener('scroll', updatePageHeight);
+            // 初始获取页面高度
+            updatePageHeight();
+        }
     })
+
+    function updatePageHeight() {
+        if(window.innerWidth > 500){
+            const div = document.getElementById('this_mt_right');
+            const divheight = div.offsetHeight;
+            let totalHeight = 0;
+            const qtq = document.querySelector('.detail-left')
+            try{
+                totalHeight = qtq.offsetHeight
+            }catch (ex){
+                totalHeight = 0
+            }
+
+            const pageHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+            document.getElementById('adv_sticky').style.height = (totalHeight - divheight) + 'px';
+            //console.log('sticky高度:', document.getElementById('adv_sticky').offsetHeight);
+        }
+    }
 </script>
 
 <script>
