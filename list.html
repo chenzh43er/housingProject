@@ -572,6 +572,7 @@
     const display_state = params.get('state');
     const display_city = params.get('city');
     const display_district = params.get('district');
+    const pageNo = params.get('page');
 
     // 获取总数
     const { count: totalCount, error: countError } = await countHouses(display_state, display_city, display_district);
@@ -690,6 +691,10 @@
             pageSize: 20,
             callback: function (_, pagination) {
                 renderList(pagination.pageNumber);
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
             }
         });
     });
