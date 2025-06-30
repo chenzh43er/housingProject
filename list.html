@@ -580,6 +580,46 @@
         console.error('统计数量失败:', countError);
     }
 
+    let adsFinalHTMLCache = [];
+    let adObserver = null;
+    let cachedAdsSet = new Set();
+
+    function initAdObserver() {
+        if (adObserver) return;
+
+        adObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+
+                    if (cachedAdsSet.has(el)) return;
+
+                    loadListAdv_Test(el, (finishedEl) => {
+                        if (!cachedAdsSet.has(finishedEl)) {
+                            adsFinalHTMLCache.push(finishedEl.outerHTML);
+                            cachedAdsSet.add(finishedEl);
+                            console.log("✅ 广告已缓存，当前缓存长度:", adsFinalHTMLCache.length);
+                        }
+                    });
+
+                    adObserver.unobserve(el);
+                }
+            });
+        }, { rootMargin: '5px' });
+    }
+
+    function observeAdsOnFirstPageOnly(pageNumber) {
+        if (pageNumber !== 1) return;
+
+        // 只监听第1页插入的广告
+        requestAnimationFrame(() => {
+            document.querySelectorAll('.state_advClass').forEach(el => {
+                adObserver.observe(el);
+            });
+        });
+    }
+
+
     // 渲染房源列表
     async function renderList(pageNumber = 1) {
         const { data, error } = await fetchData(display_state, display_city, display_district, pageNumber, 20);
@@ -591,110 +631,110 @@
         document.getElementById('total').innerText = totalCount;
 
         let html = '';
-        data.forEach((house,index) => {
+        let advIndex = 0;
+
+        data.forEach((house, index) => {
             const serverPic = "https://pub-57bc773ebbc24ef1be9f0d6d9681b286.r2.dev/" + house.mainpic + "/";
             const picsObj = JSON.parse(house.pics_jsonStr || "[]");
 
             html += `
-            <a href="./detail.html?id=${house.id}&state=${house.display_state}&city=${house.display_city}&district=${house.display_district}">
-                <li class="statelists-imgli">
-                    <div class="statelists-link">
-                        <div class="imgli-box">
-                            <img src="${serverPic + (picsObj[0] || '')}" alt="${house.name}" class="most-img">
+        <a href="./detail.html?id=${house.id}&state=${house.display_state}&city=${house.display_city}&district=${house.display_district}">
+            <li class="statelists-imgli">
+                <div class="statelists-link">
+                    <div class="imgli-box">
+                        <img src="${serverPic + (picsObj[0] || '')}" alt="${house.name}" class="most-img">
+                    </div>
+                    <div class="statelists-right">
+                        <div class="statetitle">${house.name}</div>
+                        <div class="state-address">${house.location}</div>
+                        <div class="state-address">${house.ver}</div>
+                        <div class="state-address">${house.statetype}</div>
+                        <div class="state-address">
+                            <span>${house.room} Zimmer</span>
+                            <span>${house.area}</span>
+                            <span>${house.loft} Geschoss</span>
                         </div>
-                        <div class="statelists-right">
-                            <div class="statetitle">${house.name}</div>
-                            <div class="state-address">${house.location}</div>
-                            <div class="state-address">${house.ver}</div>
-                            <div class="state-address">${house.statetype}</div>
-                            <div class="state-address">
-                                <span>${house.room} Zimmer</span>
-                                <span>${house.area}</span>
-                                <span>${house.loft} Geschoss</span>
-                            </div>
-                            <div class="most-bottom">
-                                <div class="most-left">
-                                    ${house.price} Kaltmiete zzgl. NK
-                                </div>
+                        <div class="most-bottom">
+                            <div class="most-left">
+                                ${house.price} Kaltmiete zzgl. NK
                             </div>
                         </div>
                     </div>
-                </li>
-            </a>`;
+                </div>
+            </li>
+        </a>`;
 
-            if((index +1 ) % 2 == 0 ){
-                html += `
+            // ⬇️ 每2个房源插入1条广告
+            if ((index + 1) % 2 === 0) {
+                if (pageNumber === 1) {
+                    html += `
                 <li class="statelists-imgli state_advClass">
-                        ${returnAdvWord()}
-                </li>`
+                    ${returnAdvWord()}
+                </li>`;
+                } else {
+                    const adHtml = adsFinalHTMLCache[advIndex];
+                    if (adHtml) {
+                        html += adHtml;
+                        advIndex++;
+                    }
+                }
             }
-
-            if(data.length == 1){
-                html += `
-                <li class="statelists-imgli state_advClass">
-                        ${returnAdvWord()}
-                </li>`
-            }
-
         });
 
-        if(display_district && display_city && display_state){
-            //console.log("ALL")
-
-            document.getElementById("locate_search").innerHTML=`<span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-                        <a href="./state.html" itemprop="item" class="cur-bread-crumbs" style="color: color: #1174eb;">
-                            <i itemprop="name" style="color: #1174eb;">${display_state}</i>
-                        </a>
-                        <meta itemprop="position" content="1">
-                    </span>
-                    <span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-                        <span class="bread-crumbs-icon">/</span>
-                        <a href="./city.html?state=${display_state}" itemprop="item" class="cur-bread-crumbs" style="color: color: #1174eb;">
-                            <i itemprop="name" style="color: #1174eb;">${display_city}</i>
-                        </a>
-                        <meta itemprop="position" content="2">
-                    </span>
-                    <span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-                        <span class="bread-crumbs-icon">/</span>
-                        <a href="./district.html?state=${display_state}&city=${display_city}" itemprop="item" class="cur-bread-crumbs" style="color: color: #1174eb;">
-                            <i itemprop="name" style="color: #1174eb;">${display_district}</i>
-                        </a>
-                        <meta itemprop="position" content="2">
-                    </span>`
-
-        }else{
-            document.getElementById("locate_search").innerHTML=``
+        // 面包屑路径
+        if (display_district && display_city && display_state) {
+            document.getElementById("locate_search").innerHTML = `
+            <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                <a href="./state.html" itemprop="item" class="cur-bread-crumbs" style="color: #1174eb;">
+                    <i itemprop="name">${display_state}</i>
+                </a>
+                <meta itemprop="position" content="1">
+            </span>
+            <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                <span class="bread-crumbs-icon">/</span>
+                <a href="./city.html?state=${display_state}" itemprop="item" class="cur-bread-crumbs" style="color: #1174eb;">
+                    <i itemprop="name">${display_city}</i>
+                </a>
+                <meta itemprop="position" content="2">
+            </span>
+            <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                <span class="bread-crumbs-icon">/</span>
+                <a href="./district.html?state=${display_state}&city=${display_city}" itemprop="item" class="cur-bread-crumbs" style="color: #1174eb;">
+                    <i itemprop="name">${display_district}</i>
+                </a>
+                <meta itemprop="position" content="3">
+            </span>`;
+        } else {
+            document.getElementById("locate_search").innerHTML = ``;
         }
 
+        // 插入 DOM
         $('.statelists').html(html);
         document.body.style.display = "block";
 
+        // 初始化 observer（只需一次）
+        initAdObserver();
 
-        const observer = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    loadListAdv_Test(entry.target);
-                    obs.unobserve(entry.target);
-                }
-            });
-        }, { rootMargin: '5px' });
-        document.querySelectorAll('.state_advClass').forEach(el => observer.observe(el));
-
+        // 仅第一页监听广告懒加载 + 缓存
+        observeAdsOnFirstPageOnly(pageNumber);
     }
+
+
 
     // 初始化分页
     $(document).ready(function () {
         getQueryParams();
+        initAdObserver();
 
         $('#paginationjs').pagination({
             dataSource: Array.from({ length: totalCount }, (_, i) => i + 1),
             pageSize: 20,
             callback: function (_, pagination) {
-                renderList(pagination.pageNumber);
                 window.scrollTo({
                     top: 0,
                     behavior: 'smooth'
                 });
+                renderList(pagination.pageNumber);
             }
         });
     });
@@ -874,9 +914,14 @@
 </script>
 
 <script>
-    function loadListAdv_Test(el) {
-        // 插入 <ins> HTML
-        el.innerHTML = returnAdvTestWord();
+    function loadListAdv_Test(el, onFinish) {
+        // 模拟广告异步加载
+        setTimeout(() => {
+            el.innerHTML = `<div class="adv-box">[Adv Show]</div>`;
+            if (typeof onFinish === 'function') {
+                onFinish(el);
+            }
+        }, 300);
     }
 </script>
 
