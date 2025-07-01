@@ -11,9 +11,9 @@
     <link type="text/css" rel="stylesheet" href="./Public/Css/hs-style.css">
     <link type="text/css" rel="stylesheet" href="./Public/Css/lch-office.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="./Public/Css/pagination.css">
+<!--    <link rel="stylesheet" href="./Public/Css/pagination.css">-->
     <script src="./Public/Js/jquery-3.0.0.min.js"></script>
-    <script src="./Public/Js/pagination.min.js"></script>
+<!--    <script src="./Public/Js/pagination.min.js"></script>-->
     <script src="./Public/Js/utlParam.js"></script>
     <script src="./Public/Js/common.js"></script>
     <link rel="icon" href="./Public/Images/icon.png" type="image/png">
@@ -96,6 +96,65 @@
             position: sticky;
             top: 70px;
             height: 600px !important;
+        }
+
+        .pagination {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            /*padding: 16px;*/
+        }
+
+        .pagination button,
+        .pagination .ellipsis {
+            padding: 8px 14px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            background-color: #289de9;   /* 非当前页默认背景 */
+            color: white;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .pagination .ellipsis {
+            background-color: transparent;
+            color: #999;
+            cursor: default;
+        }
+
+        .pagination button[disabled] {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* ✅ 当前页：白底 + 蓝字 + 蓝边框 */
+        .pagination .active {
+            background-color: white;
+            color: #289de9;
+            border: 2px solid #289de9;
+        }
+
+        .pagination .active:hover {
+            background-color: white;
+            color: #289de9;
+            border: 2px solid #289de9;
+        }
+
+        @media (max-width: 480px) {
+            .pagination {
+                gap: 2px;
+                /*padding: 12px;*/
+            }
+
+            .pagination button,
+            .pagination .ellipsis {
+                padding: 6px 10px;
+                font-size: 14px;
+            }
         }
     </style>
 </head>
@@ -295,9 +354,7 @@
 
         </ul>
 
-        <div class="paginationjs paginationjs-theme-blue paginationjs-big" id="paginationjs" style="justify-content: center;margin-top: 40px;">
-
-        </div>
+        <div class="pagination" id="paginationContainer"></div>
 
     </div>
     <div class="detail-rightside" id = "asidePage">
@@ -572,13 +629,75 @@
     const display_state = params.get('state');
     const display_city = params.get('city');
     const display_district = params.get('district');
-    const pageNo = params.get('page');
+    const currentPage = Math.max(1, parseInt(params.get('page')) || 1);
+    const pageSize = 20;
+    const container = document.getElementById('paginationContainer');
+
+    function createButton(label, page, isActive = false, isDisabled = false) {
+        const btn = document.createElement('button');
+        btn.textContent = label;
+        if (isActive) btn.classList.add('active');
+        if (isDisabled) btn.disabled = true;
+        btn.onclick = () => goToPage(page);
+        return btn;
+    }
+
+    function createEllipsis() {
+        const span = document.createElement('span');
+        span.className = 'ellipsis';
+        span.textContent = '...';
+        return span;
+    }
+
+    function renderPagination() {
+        container.innerHTML = '';
+
+        container.appendChild(createButton('«', currentPage - 1, false, currentPage === 1));
+
+        if (maxPage <= 5) {
+            for (let i = 1; i <= maxPage; i++) {
+                container.appendChild(createButton(i, i, i === currentPage));
+            }
+        } else {
+            if (currentPage <= 2) {
+                for (let i = 1; i <= 3; i++) {
+                    container.appendChild(createButton(i, i, i === currentPage));
+                }
+                container.appendChild(createEllipsis());
+                container.appendChild(createButton(maxPage, maxPage, maxPage === currentPage));
+            } else if (currentPage >= maxPage - 1) {
+                container.appendChild(createButton(1, 1, currentPage === 1));
+                container.appendChild(createEllipsis());
+                for (let i = maxPage - 2; i <= maxPage; i++) {
+                    container.appendChild(createButton(i, i, i === currentPage));
+                }
+            } else {
+                container.appendChild(createButton(1, 1));
+                container.appendChild(createEllipsis());
+                for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+                    container.appendChild(createButton(i, i, i === currentPage));
+                }
+                container.appendChild(createEllipsis());
+                container.appendChild(createButton(maxPage, maxPage));
+            }
+        }
+
+        container.appendChild(createButton('»', currentPage + 1, false, currentPage === maxPage));
+    }
+
+    function goToPage(page) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('page', page);
+        window.location.href = url.toString();
+    }
 
     // 获取总数
     const { count: totalCount, error: countError } = await countHouses(display_state, display_city, display_district);
     if (countError) {
         console.error('统计数量失败:', countError);
     }
+
+    const maxPage = Math.ceil(totalCount / pageSize);
 
     let adsFinalHTMLCache = [];
     let adObserver = null;
@@ -595,21 +714,21 @@
                     if (cachedAdsSet.has(el)) return;
 
                     loadListAdv_Test(el, (finishedEl) => {
-                        if (!cachedAdsSet.has(finishedEl)) {
-                            adsFinalHTMLCache.push(finishedEl.outerHTML);
-                            cachedAdsSet.add(finishedEl);
-                            console.log("✅ 广告已缓存，当前缓存长度:", adsFinalHTMLCache.length);
-                        }
+                        // if (!cachedAdsSet.has(finishedEl)) {
+                        //     //adsFinalHTMLCache.push(finishedEl.outerHTML);
+                        //     //cachedAdsSet.add(finishedEl);
+                        //     //console.log("✅ 广告已缓存，当前缓存长度:", adsFinalHTMLCache.length);
+                        // }
                     });
 
                     adObserver.unobserve(el);
                 }
             });
-        }, { rootMargin: '5px' });
+        }, { rootMargin: '100px' });
     }
 
     function observeAdsOnFirstPageOnly(pageNumber) {
-        if (pageNumber !== 1) return;
+        //if (pageNumber !== 1) return;
 
         // 只监听第1页插入的广告
         requestAnimationFrame(() => {
@@ -622,7 +741,7 @@
 
     // 渲染房源列表
     async function renderList(pageNumber = 1) {
-        const { data, error } = await fetchData(display_state, display_city, display_district, pageNumber, 20);
+        const { data, error } = await fetchData(display_state, display_city, display_district, pageNumber, pageSize);
         if (error) {
             console.error('数据获取失败:', error);
             return;
@@ -666,18 +785,10 @@
 
             // ⬇️ 每2个房源插入1条广告
             if ((index + 1) % 2 === 0) {
-                if (pageNumber === 1) {
                     html += `
                 <li class="statelists-imgli state_advClass">
                     ${returnAdvWord()}
                 </li>`;
-                } else {
-                    const adHtml = adsFinalHTMLCache[advIndex];
-                    if (adHtml) {
-                        html += adHtml;
-                        advIndex++;
-                    }
-                }
             }
         });
 
@@ -719,24 +830,25 @@
         observeAdsOnFirstPageOnly(pageNumber);
     }
 
-
-
     // 初始化分页
     $(document).ready(function () {
         getQueryParams();
         initAdObserver();
 
-        $('#paginationjs').pagination({
-            dataSource: Array.from({ length: totalCount }, (_, i) => i + 1),
-            pageSize: 20,
-            callback: function (_, pagination) {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-                renderList(pagination.pageNumber);
-            }
-        });
+        renderList(currentPage);
+        renderPagination();
+
+        // $('#paginationjs').pagination({
+        //     dataSource: Array.from({ length: totalCount }, (_, i) => i + 1),
+        //     pageSize: 20,
+        //     callback: function (_, pagination) {
+        //         window.scrollTo({
+        //             top: 0,
+        //             behavior: 'smooth'
+        //         });
+        //         renderList(pagination.pageNumber);
+        //     }
+        // });
     });
 
     // 从URL获取参数并存储到localStorage
