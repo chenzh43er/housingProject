@@ -630,7 +630,7 @@
     const display_city = params.get('city');
     const display_district = params.get('district');
     const currentPage = Math.max(1, parseInt(params.get('page')) || 1);
-    const pageSize = 20;
+    const pageSize = 6;
     const container = document.getElementById('paginationContainer');
 
     function createButton(label, page, isActive = false, isDisabled = false) {
@@ -1029,7 +1029,7 @@
     function loadListAdv_Test(el, onFinish) {
         // 模拟广告异步加载
         setTimeout(() => {
-            el.innerHTML = `<div class="adv-box">[Adv Show]</div>`;
+            el.innerHTML = `<div class="adv-box" style="">${returnAdvTestWord()}</div>`;
             if (typeof onFinish === 'function') {
                 onFinish(el);
             }
